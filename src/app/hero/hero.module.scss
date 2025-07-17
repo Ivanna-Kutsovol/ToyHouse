@@ -1,0 +1,111 @@
+.hero{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    position: relative;
+    gap: 60px;
+
+    &__left,
+    &__right{
+        position: absolute;
+        top: -100px;
+    }
+    &__left{
+        left: 0;
+        margin: 0 0 0 -165px;
+    }
+    &__right{
+        right: 0;
+        margin: 0 -165px 0 0;
+    }
+    &__title{
+        font-size: 64px;
+        line-height: 78px;
+        color: #FF268E;
+        font-weight: bolder;
+    }
+    &__subtitle{
+        font-weight: 400;
+    }
+    &__container{
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    &__content{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    &__button{
+        padding: 19px 38px;
+        box-shadow: inset 0 0 0 3px #FF268E;
+        border-radius: 8px;
+        font-size: 24px;
+        font-weight: bolder;
+        color: #FF268E;
+        &:hover{
+            background-color: #FF268E;
+            color: var(--white);
+        }
+    }
+    &__drawing{
+        object-fit: fill;
+    }
+}
+
+.sliderHero{
+    position: relative;
+    width: 560px;
+    height: 530px;
+
+    :global(.swiper) {
+        position: relative !important;
+        height: 100% !important;
+    }
+    :global(.swiper-wrapper) {
+        display: flex !important;
+        height: 80% !important;
+    }
+    :global(.swiper-slide) {
+        display: flex !important;
+        top: 100px !important;
+    }
+    :global(.swiper-slide-active) {
+        transform: scale(2) translateY(25%) !important;
+        top: 0 !important;
+    }
+    :global(.swiper-button-next),
+    :global(.swiper-button-prev) {
+        position: absolute !important;
+        top: auto !important;
+        bottom: 10px !important;
+        transform: none !important;
+        color: var(--white) !important;
+        background-color: var(--hover-pink) !important;
+        border-radius: 50% !important;
+        width: 36px !important;
+        height: 36px !important;
+        z-index: 999 !important;
+
+    &:hover {
+        background-color: var(--white) !important;
+        color: var(--hover-pink) !important;
+    }
+  }
+
+    :global(.swiper-button-prev:after),
+    :global(.swiper-button-next:after) {
+        font-size: 14px !important;
+        font-weight: bold !important;
+    }
+
+    :global(.swiper-button-next) {
+        right: 5% !important;
+    }
+
+    :global(.swiper-button-prev) {
+        left: 80% !important;
+    }
+}

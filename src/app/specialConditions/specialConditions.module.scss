@@ -1,0 +1,42 @@
+@use "../styles/mixins" as *;
+
+.title{
+    @include title;
+}
+
+.specialConditions{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    &__item{
+        display: flex;
+        flex-direction: row;
+        background-color: #EFEFEF;
+        height: 140px;
+        width: 100%;
+        border-radius: 16px;
+        padding: 20px 45px;
+        align-items: center;
+        gap: 55px;
+    }
+    &__star{
+        background-color: var(--pink);
+        height: 100px;
+        width: 100px !important;
+        clip-path: polygon(100% 0, 85% 50%, 100% 100%, 50% 85%, 0 100%, 15% 50%, 0 0, 50% 15%);
+        color: var(--white);
+        font-size: 40px;
+        line-height: 56px;
+        font-weight: 600;
+        flex-shrink: 0;
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__text{
+        font-size: 32px;
+        font-weight: 600;
+    }
+}

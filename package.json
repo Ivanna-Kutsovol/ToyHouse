@@ -1,0 +1,32 @@
+{
+  "name": "toy-house",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@types/react-motion-slider": "^0.4.13",
+    "leaflet": "^1.9.4",
+    "next": "15.2.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.55.0",
+    "react-input-mask-next": "^3.0.0-alpha.12",
+    "react-leaflet": "^5.0.0",
+    "sass": "^1.86.3",
+    "scss": "^0.2.4",
+    "swiper": "^11.2.6"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.17",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/react-input-mask": "^3.0.6",
+    "typescript": "^5"
+  }
+}

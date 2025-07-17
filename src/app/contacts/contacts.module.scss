@@ -1,0 +1,57 @@
+@use "../styles/mixins" as *;
+
+.title{
+    @include title;
+}
+.contacts{
+    position: relative;    
+    padding: 0 0 100px 0 ;
+
+    &__left, &__right{
+        position: absolute;
+        top: 0px;
+    }
+    &__left{
+        left: 0;
+        margin: 0 0 0 -165px;
+    }
+    &__right{
+        right: 0;
+        margin: 0 -165px 0 0;
+    }
+    &__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        width: 255px;
+    }
+    &__social{
+        display: flex;
+        gap: 12px;
+    }
+    &__info{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+        justify-content: center;
+    }
+    &__text{
+        color: #1E272FCC;
+        letter-spacing: 0.6px;
+        line-height: 26px;
+        text-align: center;
+    }
+    &__infoMap{
+        display: flex;
+        gap: 30px;
+    }
+    &__infoBottom,
+    &__infoTop{
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        align-items: center;
+    }
+}

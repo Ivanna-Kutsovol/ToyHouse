@@ -1,0 +1,134 @@
+@use '../../styles/mixins' as *;
+
+.container{
+    padding: 100px 0;
+}
+.product{
+    padding: 40px 0 0 0;
+    display: flex;
+    gap: 110px;
+    &__counter{   
+        @include quantity;
+        &__button{
+            width: 40px;
+            height: 40px;
+        }
+        &__text{
+            font-size: 30px;
+            line-height: 32px;
+            font-weight: bolder;
+            width: 37px;
+            text-align: center;
+        }
+    }
+    &__title{
+        font-size: 36px;
+        line-height: 48px;
+        font-weight: bolder;
+        color: #FF268E;
+    }
+    &__price{
+        font-size: 32px;
+        font-weight: 800;
+        line-height: 36px;
+    }
+    &__titlePrice{
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+    }
+    &__buttonBuy,
+    &__buttonCart{
+        height: 40px;
+        width: 100%;
+        font-size: 20px;
+        padding: 8px 70px;
+    }
+    &__buttons{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    &__buttonBuy{
+        @include btnBuy;
+    }
+    &__buttonCart{
+        color: var(--pink);
+        font-weight: bolder;
+        border: 2px solid var(--pink);
+        border-radius: 8px;
+    }
+    &__info{
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        width: 100%;
+    }
+    &__imgContainer{
+        width: 450px !important;
+        height: 600px;
+        position: relative;
+        text-align: center;
+
+        &__mainImg{
+            width: 300px;
+            height: 427px;
+            object-fit: contain;
+        }
+        &__thumbs{
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 8px;
+            transition: 0.2s;
+            margin: 50px 0 0 0;
+            cursor: pointer;
+        }
+        :global(.swiper-slide-thumb-active .thumbImage) {
+        border-color: black !important;
+    }
+    }
+}
+
+.back{
+    font-size: 16px;
+    line-height: 24px;
+    position: relative;
+    display: flex;
+    gap: 10px;
+
+    &::before{
+        content: '‹';
+        margin-left: 8px;
+        font-size: 26px;
+        color: black;
+    }
+}
+
+.tabs{
+    &__item{     
+        display: flex;
+        flex-direction: row;
+        gap: 20px;   
+        align-items: center;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 700;
+        transition: color 0.8s ease;
+    }
+    &__active{
+        color: black;
+    }
+    &__inactive{
+        color: #B3B3B3;
+        line-height: 130%;
+    }
+    &__text{
+        font-size: 16px;
+        line-height: 32px;
+        color: #A1A1AA;
+        transition: opacity 2s ease;
+    }
+}

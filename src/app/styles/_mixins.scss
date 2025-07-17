@@ -1,0 +1,86 @@
+@mixin base-layout-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 165px;
+    .nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__list{
+            display: flex;
+            flex-direction: row;
+            gap: 24px;
+            align-items: center;
+        }
+        &__link{
+            font-weight: 500;
+            padding: 0px 7.5px;
+            border-radius: 9px;
+            line-height: 148%;
+            &:hover{
+                background-color: var(--hover-pink);
+            }
+        }
+        &__img{
+            &:hover{
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+
+@mixin title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin: 0 0 48px 0;
+  
+    &::before,
+    &::after {
+      content: '';
+      width: 40px;
+      height: 8px;
+      background-color: var(--title);
+      border-radius: 25px;
+    }
+  }
+
+@mixin quantity {
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+        align-items: center;
+        transition: 0.5s ease-in-out;
+        &__button{
+            position: relative;
+            border-radius: 50%;
+            background-color: #F4F4F4;
+            color: var(--pink);
+            font-size: 22px;
+
+            &:hover{
+                cursor: pointer;
+            }
+            &::before{
+                content: '';
+                border-radius: 50%;
+                border: 2px solid var(--pink);
+                width: 21px;
+                height: 21px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            } 
+    }
+}
+
+@mixin btnBuy {
+    background-color: var(--pink);
+    color: var(--white);
+    font-weight: bolder;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}

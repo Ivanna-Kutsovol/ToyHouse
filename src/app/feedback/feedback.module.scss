@@ -1,0 +1,158 @@
+@use "../styles/mixins" as *;
+
+.title{
+    @include title;
+    color: var(--white);
+    &::before,
+    &::after {
+      background-color: var(--white);
+    }
+}
+.feedbackWrapper{
+    position: relative;
+    overflow: visible;
+    &__next, 
+    &__prev{
+        background-color: var(--white) ;
+        width: 40px ;
+        height: 40px ;
+        border-radius: 50% ;
+        display: flex ;
+        align-items: center;
+        justify-content: center;
+        position: absolute ;
+        z-index: 1 ;
+        box-shadow: 0 2px 8px #00000015 ;
+        top: 50%;
+        cursor: pointer;
+    }
+    &__next{
+        right: -80px;
+    }
+    &__prev{
+        left: -80px;
+        &::before{
+            transform: rotate(180deg);
+        }
+    }
+    &__next::after, 
+    &__prev::before{
+        content: "❯";
+        position: absolute;
+        background-color: transparent;
+        color: #1E272F40;
+    }
+    &__pagination{
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        position: absolute;
+        bottom: -14px;
+        left: 50%;
+        color: black;
+    }
+    &__paginationItem{
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #1E272F40;
+        transition: background 0.3s ease;
+    }
+    &__paginationItem.active{
+        background-color: #FF268E;
+    }
+}
+.feedback{
+    position: relative;
+    overflow: hidden;
+
+    &__background{
+        position: absolute;
+        top: -160px;
+        left: 0px;
+        margin: 0 0 0 -165px;
+        z-index: -10;
+    }
+    &__stars{
+        display: flex;
+        flex-direction: row;
+        gap: 1px;
+    }
+    &__star{
+        background-color: #999999;
+        height: 17px;
+        width: 18px;
+        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        border-radius: 10px;
+    }
+    &__starEmpty {
+        width: 18px;
+        height: 17px;
+        background-image: url('../../../public/feedback/star-filled.svg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    &__item{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        background-color: var(--white);
+        border-radius: 16px;
+        padding: 24px;
+        margin: 0 0 10px 0;
+        width: 340px ;
+        height: 250px ;
+        scroll-snap-align: center;
+        box-shadow: 0 2px 8px #00000015;
+    }
+    &__profile{
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+    }
+    &__info{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    &__name{
+        font-weight: 500;
+        font-size: 18px;
+    }
+    &__text{
+        font-size: 16px;
+        line-height: 150%;
+        color: #00000080;
+    }
+    .feedback__outerWrapper {
+        overflow-x: auto;
+        width: 100%;
+        box-sizing: border-box;
+      
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+      .feedback__swiperWrapper {
+        display: flex;
+        gap: 30px;
+        width: max-content;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        animation: scroll 40s linear infinite;
+      
+        &:hover {
+          animation-play-state: paused;
+        }
+      }
+      
+}
+
+// @keyframes scroll {
+//     0% {
+//       transform: translateX(0);
+//     }
+//     100% {
+//       transform: translateX(-50%);
+//     }
+//   }

@@ -1,0 +1,79 @@
+@use "../styles/mixins" as *;
+
+.title{
+    @include title;
+}
+.newSoon {
+  margin: 0 -165px 0 -165px;
+    &__carusel {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      padding: 15px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100%;
+        background: linear-gradient(90deg, #fff 55%, rgba(255, 255, 255, 0));
+        z-index: 1;
+        // margin: 0 0 0 -165px;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 250px;
+        height: 100%;
+        background: linear-gradient(270deg, #fff 55%, rgba(255, 255, 255, 0));
+        z-index: 1;
+        // margin: 0 -165px 0 0;
+      }
+    }
+  
+    &__track {
+      display: flex;
+      width: fit-content;
+      animation: scroll 20s linear infinite;
+      &:hover{
+        animation-play-state: paused;
+      }
+    }
+  
+    &__item {
+      flex: 0 0 auto;
+      margin-right: 24px;
+    }
+  
+    &__img {
+      display: inline-block;
+      transition: transform 0.3s ease-in-out;
+      cursor: pointer;
+    
+      > img {
+        width: 200px;
+        height: 250px;
+        object-fit: contain;
+      }
+  
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+  
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  

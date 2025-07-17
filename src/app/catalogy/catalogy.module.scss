@@ -1,0 +1,24 @@
+@use "../styles/mixins" as *;
+
+.title{
+    @include title;
+}
+
+.catalogy{
+    position: relative;
+    height: 656px;
+
+    &__background{
+        position: absolute;
+        bottom: -160px;
+        left: 0px;
+        z-index: -1;
+        margin: 0 0 0 -165px;
+    }
+
+    &__products{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

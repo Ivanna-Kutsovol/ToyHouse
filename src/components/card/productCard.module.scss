@@ -1,0 +1,94 @@
+@use "../../app/styles/mixins" as *;
+
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    background-color: var(--white);
+    box-shadow: 0 2px 8px #00000025;
+    border-radius: 16px;
+    padding: 24px;
+    width: 350px;
+    overflow: hidden;
+    cursor: pointer;
+
+    &__link{
+        display: flex;
+        gap: 16px;
+        flex-direction: column;
+    }
+
+    &__backgraundProduct{
+        width: 300px;
+        height: 300px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        border-radius: 10px;
+        background: linear-gradient(144.47deg, #fff, #d9d9d9);
+    }
+    &__img{
+        width: 250px;
+        height: 230px;
+        object-fit: contain;
+        &:hover {
+            transform: scale(1.1);
+            transition: 0.5s ease-in;
+        }
+    }
+
+    &__info{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    &__name{
+        font-size: 18px;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+    &__description{
+        font-size: 16px;
+        color: #1E272F80;
+        line-height: 26px;
+    }
+    &__price{
+        font-size: 26px;
+        line-height: 46px;
+        font-weight: 500;
+    }
+    &__buttons{
+        display: flex;
+        flex-direction: row;
+        gap: 70px;
+        justify-content: space-between;
+    }
+    &__counter{
+        @include quantity;
+        &__button{
+            width: 38px;
+            height: 38px;
+        }
+        &__text{
+            font-size: 24px;
+            font-weight: bolder;
+            width: 30px;
+            text-align: center;
+        }
+    }
+}
+
+    .button{
+        height: 56px;
+        font-size: 24px;
+        @include btnBuy;
+    }
+    .button_full{
+        width: 21vw;
+        max-width: 100%;
+    }
+    .button_small{
+        width: 126px;
+    }

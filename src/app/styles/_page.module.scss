@@ -1,0 +1,25 @@
+.container{
+  display: flex;
+  gap: 200px;
+  flex-direction: column;
+  padding: 150px 0;
+}
+
+@media(max-width: 1024px){
+  .container{
+    gap: 150px;
+  }
+}
+@media(max-width: 768px){
+  .container{
+    gap: 100px;
+  }
+}
+@media(max-width: 500px){
+  .container{
+    gap: 80px;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  
+}

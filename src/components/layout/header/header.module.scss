@@ -1,0 +1,28 @@
+@use "../../../app/styles/mixins" as *;
+.main{
+    position: fixed;
+    width: 100%;
+    margin-left: -165px;
+    margin-right: -165px;
+    z-index: 5;
+    background-color: var(--white);
+    gap: 350px;
+
+    @include base-layout-block;
+    .nav{
+        &__link{
+            font-size: 20px;
+        }
+    }
+}
+.mobileHeader{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 25px 0;
+    background-color: var(--white);
+    position: fixed;
+    z-index: 2;
+    width: 90%;
+    top: 0;
+}
