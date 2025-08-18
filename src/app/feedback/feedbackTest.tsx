@@ -8,8 +8,6 @@ import Fbdk1 from "../../../public/feedback/ImgFbdk1.webp";
 import Fbdk2 from "../../../public/feedback/ImgFbdk2.webp";
 import Fbdk3 from "../../../public/feedback/ImgFbdk3.webp";
 import Fbdk4 from "../../../public/feedback/ImgFbdk4.webp";
-import Fbdk5 from "../../../public/feedback/ImgFbdk5.webp";
-import Fbdk6 from "../../../public/feedback/ImgFbdk6.webp";
 
 const feedback = [
     {
@@ -70,7 +68,7 @@ const Feedback = () => {
       const scrollLeft = () => wrapperRef.current?.scrollBy({ left: -STEP, behavior: 'smooth' });
 
     return (
-        <section className={stl.feedbackWrapper}>
+        <section className={stl.feedbackWrapper} id="feedback">
         <Image className={stl.feedback__background} src={Background} alt="background" />
         <section className={stl.feedback}>
             <section className={stl.title}>

@@ -30,7 +30,7 @@ const AboutUs = () => {
         new Array(Accordion.length).fill(false)
     );
 
-    const contentRef = useRef<HTMLDivElement>(null);
+    const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const toggleAccordion = (index: number) => {
         const newStates = [...openStates];
@@ -39,7 +39,7 @@ const AboutUs = () => {
     };
 
     return (
-        <div className={stl.container}>
+        <section className={stl.container} id="about">
             <section className={stl.title}>
                 <h1 className={stl.title__text}>About Us</h1>
             </section>
@@ -56,13 +56,16 @@ const AboutUs = () => {
                             <Image src={openStates[index] ? Minus : Plus} alt="icon"  className={stl.accordion__icon}/>
                         </div>
                         <div 
-                            ref={contentRef}
-                            className={stl.accordion__content}
+                            ref={(el) => {
+                                if(el) contentRefs.current[index] = el
+                            }}
+                            className={`${stl.accordion__content} ${
+                            openStates[index] ? stl.accordion__contentActive : ""
+                            }`}
                             style={{
                                 maxHeight: openStates[index]
-                                ? `${contentRef.current?.scrollHeight}px`
+                                ? `${contentRefs.current[index]?.scrollHeight}px`
                                 : "0px",
-                                paddingTop: openStates[index] ? "24px" : "0px",
                             }}>
                          <p className={ openStates[index] ? stl.accordion__contentActive : stl.accordion__content}>{item.answer}</p>
                          </div>
@@ -83,7 +86,7 @@ const AboutUs = () => {
                     <Image src={Twitter} width={32} height={32} alt="icon" />
                 </a>
             </div>
-        </div>
+        </section>
     );
 };
 

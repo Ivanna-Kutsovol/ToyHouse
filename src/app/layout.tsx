@@ -4,7 +4,6 @@ import "./styles/App.scss";
 import { Header } from "@/components/layout/header/header";
 import { Footer } from "@/components/layout/footer/footer";
 import Contacts from "./contacts/contacts";
-import stl from "../app/styles/_page.module.scss";
 
 export const metadata: Metadata = {
   title: "Toy house",

@@ -78,6 +78,74 @@
             text-align: center;
         }
     }
+
+    &--cart{
+        flex-direction: row;        
+        gap: 16px;
+        padding: 24px 0 ;
+        width: 525px;
+        height: 210px;
+        box-shadow: none;
+        cursor: default;
+        .card{
+            &__info{
+                gap: 9px;
+            }
+            &__link{
+                display: flex;
+                flex-direction: row;
+            }
+            &__backgraundProduct{
+                width: 180px;
+                height: 180px;
+                padding: 20px 30px;
+            }
+            &__img{
+                width: 100px;
+                height: 140px;
+            }
+            &__buttons{
+                display: flex;
+                flex-direction: row-reverse;
+                gap: 0px;
+                justify-content: space-between;
+            }
+            &__price{
+                font-size: 15px;
+                line-height: 36px;
+            }
+            &__footer{
+                display: flex;
+                justify-content: space-between;
+            }
+            &__containerPrice{
+                display: flex;
+                align-items: center;
+                gap: 20px;
+            }
+            &__counter{
+                &__button{
+                    width: 30px;
+                    height: 30px;
+                    font-size: 20px;
+                }
+                &__text{
+                    font-size: 20px;
+                    font-weight: bolder;
+                    width: 20px;
+                }
+            }
+            &__name{
+                &:hover{
+                    text-decoration: none;
+                }
+            }
+        }
+        .buttonDelete{
+            color: #686868;
+            font-size: 14px;
+        }
+    }
 }
 
     .button{

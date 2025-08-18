@@ -13,12 +13,13 @@ import Facebook from "../../../public/contacts/socialFacebook.webp";
 import Instagram from "../../../public/contacts/socialInstagram.webp";
 import Twitter from "../../../public/contacts/socialTwitter.webp";
 import Youtube from "../../../public/contacts/socialYoutube.webp";
-import Map from "./map";
+import dynamic from "next/dynamic";
 
+const MyMap = dynamic(() => import("./map"), { ssr: false });
 const Contacts = () => {
     return(
-        <section className={stl.contacts}>
-            <Image className={stl.contacts__left} src={Left} alt="left" />
+        <section className={stl.contacts} id="contacts">
+            <Image className={stl.contacts__left} priority src={Left} alt="left" />
             <section className={stl.title}>
                 <h1 className={stl.title__text}>Contacts</h1>
             </section>
@@ -62,7 +63,7 @@ const Contacts = () => {
             </div>
                 
             </section>
-                <Map/>
+                <MyMap/>
             </section>
             <Image className={stl.contacts__right} src={Right} alt="right" />
         </section>

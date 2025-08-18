@@ -10,7 +10,7 @@ import { useCart } from "../../context/cartContext";
 const Catalogy = () => {
     const { cart, addToCart, updateQuantity } = useCart();
     return (
-        <section className={stl.catalogy}>
+        <section className={stl.catalogy} id="catalogy">
             <Image className={stl.catalogy__background} src={Background} alt="background" />
             <section className={stl.title}>
                 <h1 className={stl.title__text}>Catalogy</h1>

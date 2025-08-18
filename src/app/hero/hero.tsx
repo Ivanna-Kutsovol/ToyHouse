@@ -43,7 +43,7 @@ const Hero = () => {
                     {[...products, ...products].map((product, index) => (
                         <SwiperSlide key={`${product.id}-${index}`}>
                         <Link href={`/catalogy/${product.id}`}>
-                            <Image src={product.img} alt={product.name} width={133} height={200} />
+                            <Image src={product.img} alt={product.name} width={130} height={195} />
                         </Link>
                         </SwiperSlide> 
                     ))}            

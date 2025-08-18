@@ -25,7 +25,7 @@ const Product = ({ params, images }: { params: Promise<{ id: string }>, images: 
     const { id } = use(params);
     const product = products.find((p) => p.id === Number(id));
     const [activeTab, setActiveTab] = useState("info");
-    const [trumbsSwiper, setTrumbsSwiper] = useState<SwiperType | null>(null);
+    const [thumbsSwiper, setTrumbsSwiper] = useState<SwiperType | null>(null);
 
     if(!product) return <h1>Product not found</h1>;
 
@@ -40,7 +40,7 @@ const Product = ({ params, images }: { params: Promise<{ id: string }>, images: 
                         modules={[Navigation, Autoplay, Thumbs]}
                         autoplay={{ delay: 3000 }}
                         spaceBetween={30}
-                        thumbs={{ swiper: trumbsSwiper }}
+                        thumbs={{ swiper: thumbsSwiper }}
                         centeredSlides={true}
                         loop={true}
                         className={stl.swiper}
@@ -53,12 +53,15 @@ const Product = ({ params, images }: { params: Promise<{ id: string }>, images: 
                     </Swiper>
 
                     <Swiper
-                        modules={[Thumbs]}
+                        modules={[Thumbs, Navigation]}
+                        navigation={{disabledClass: 'swiper-button-disabled'}}
                         onSwiper={setTrumbsSwiper}
                         spaceBetween={10}
                         slidesPerView={4}
                         freeMode={true}
                         watchSlidesProgress={true}
+                        loop={true}
+                        className={stl.product__thumbsContainer}
                     >
                         {product.details.img.map((imag, index) => (
                             <SwiperSlide key={`thumb-${index}`}>

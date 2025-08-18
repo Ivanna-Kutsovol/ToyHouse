@@ -1,0 +1,218 @@
+@use '../styles/mixins'  as *;
+
+.cart{
+    padding: 80px 0;
+    &__main{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 60px;
+    }
+    &__totalContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+    &__summary{
+        display: flex;
+        flex-direction: column;
+        padding: 12px 0 0 0;
+        gap: 8px;
+    }
+    &__line{
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+    }
+    &__labelTotal,
+    &__valueTotal{
+        font-size: 20px;
+        line-height: 30px;
+    }
+    &__label,
+    &__value{
+        font-size: 13px;
+        line-height: 18px;
+    }
+    &__input{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    &__button{
+        flex: 1;
+    }
+    &__form{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        &__label{
+            font-size: 16px;
+            line-height: 30px;
+        }
+        &__input{
+            border: 1px solid #080B13;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 16px;
+            ::placeholder{
+                color: #CECECE;
+            }
+            resize: none;
+        }
+        &__paymentButton,
+        &__labelButton{
+            display: block;
+            font-size: 20px;
+            padding: 12px 24px;
+            width: 100%;
+            border: 1px solid #FF268E;
+            border-radius: 8px;
+            box-sizing: border-box;
+            text-align: center;
+            color: #FF268E;
+
+            &:hover{
+                background-color: #ffe6f2;
+            }
+        }
+        &__paymentButton,
+        &__labelButtonPickup{
+            border: 1px solid #FF268E;
+            color: #FF268E;
+        }
+        &__link{
+            color: #3B5998;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+        &__button,
+        &__buttonActive{
+            background-color: #898986;
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 20px;
+        }
+        &__buttonActive{
+            background-color: #FF268E;
+            &:hover{
+                box-shadow: 0 0 20px var(--hover-pink)
+            }
+        }
+    }
+    &__topic{
+        font-size: 20px;
+        line-height: 30px;
+    }
+    &__delivery{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+    
+    input[type="radio"]{
+        display: none;
+        &:checked + label {
+            background-color: #FF268E;
+            color: #fff;
+            border-color: #FF268E;
+    }
+    }
+    input[type="checkbox"]{
+        width: 24px;
+        height: 24px;
+        background-color: #fff;
+        -webkit-appearance: none;
+        appearance: none;
+        border: 1px solid #080B13;
+        border-radius: 4px;
+        cursor: pointer;
+        &:checked{
+            background-color: #FF268E;
+        }
+    }
+    &__sectionForm{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    &__inputCheckbox{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+    }
+}
+
+.back{
+    @include back;
+    padding: 50px 0;
+}
+
+.alert{
+    position: fixed;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgba(242, 242, 247, 0.5);
+    border-radius: 14px;
+    backdrop-filter: blur(50px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    animation: pulse 1.5s infinite;
+    &.active{
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    &.hidden{
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+        pointer-events: none;
+    }
+    &__text{
+        color: var(--black);
+        line-height: 30px;
+        font-size: 23px;
+        padding: 35px 30px 0px 30px;
+    }
+    &__button{
+        color: #0A7AFF;
+        font-size: 20px;
+        min-width: 150px;
+        text-align: center;
+    }
+    &__buttons{
+        display: flex;
+        justify-content: center;
+        padding: 0px 30px 20px 30px;
+        align-items: center;
+        gap: 25px;
+        &::after{
+            position: absolute;
+            content: "";
+            width: 1px;
+            height: 42%;
+            background-color: #3C3C4334;
+            bottom: 0;
+            right: 50%;
+            transform: translate(-50%, 0);
+        }
+    }
+    &__line{
+        background-color: #3C3C4334;
+        height: 1px;
+        width: 100%;
+        position: relative;
+    }
+}
+
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}

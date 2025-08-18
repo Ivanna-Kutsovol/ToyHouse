@@ -85,26 +85,43 @@
             transition: 0.2s;
             margin: 50px 0 0 0;
             cursor: pointer;
+            position: relative;
         }
-        :global(.swiper-slide-thumb-active .thumbImage) {
-        border-color: black !important;
+        :global(.swiper-slide-thumb-active) img {
+        border-color: var(--title) !important;
+        }
+        :global(.swiper-button-prev) {
+            display: none;
+        }
+        :global(.swiper-button-next) {
+            margin-top: 0 !important;
+            z-index: 6 !important;
+        }
+        :global(.swiper-button-next:after){
+            color: var(--foreground);
+            font-size: 20px;
+            font-weight: bold;
+        }
+
     }
+    &__thumbsContainer{
+        position: relative;
+
+        &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -10px;
+        width: 110px;
+        height: 100%;
+        background: linear-gradient(-90deg, #fff 55%, rgba(255, 255, 255, 0));
+        z-index: 5;
+      }
     }
 }
 
 .back{
-    font-size: 16px;
-    line-height: 24px;
-    position: relative;
-    display: flex;
-    gap: 10px;
-
-    &::before{
-        content: '‹';
-        margin-left: 8px;
-        font-size: 26px;
-        color: black;
-    }
+    @include back;
 }
 
 .tabs{

@@ -9,6 +9,7 @@ type Product = {
     id: number,
     name: string,
     price: number,
+    discount?: number,
     img: string,
     description: string,
 }
@@ -16,34 +17,69 @@ type Product = {
 type Props = {
     product: Product,
     quantity: number,
-    onAdd: () => void,
-    onChange: (qty : number) => void
+    onAdd?: () => void,
+    onChange: (qty : number) => void,
+    onDelete?: () => void,
+    showBuyButton?: boolean,
+    variant?: 'catalog' | 'cart'
 }
 
-const ProductCard = ({product, quantity, onAdd, onChange} : Props) => {
+const ProductCard = ({product, quantity, onAdd, onChange, onDelete, showBuyButton, variant} : Props) => {
+    const isCart = variant==='cart';
+
     return(
-        <section className={stl.card}>
-            <Link className={stl.card__link} href={`/catalogy/${product.id}`}>
+        <section className={`${stl.card} ${isCart ? stl['card--cart'] : ''}`}>
             <div className={stl.card__backgraundProduct}>
                 <Image className={stl.card__img} src={product.img} alt="product" width={170} height={250} />
             </div>
-            
-            <div className={stl.card__info}>
-                <p className={stl.card__name}>{product.name}</p>
-                <p className={stl.card__description}>{product.description}</p>
-                <p className={stl.card__price}>$ {product.price}</p>
-            </div>
-            </Link>
-            <div className={stl.card__buttons}>
-                <button className={`${stl.button} ${quantity === 0 ? stl.button_full : stl.button_small}`} onClick={onAdd}>Buy</button>
-                {quantity > 0 && (
+
+            {isCart ? (
+                <div className={stl.card__info}>
+                    <p className={stl.card__name}>{product.name}</p>
+                    <p className={stl.card__description}>{product.description}</p>
+                    {quantity > 0 && (
                 <div className={stl.card__counter}>
                     <button className={stl.card__counter__button} onClick={() => onChange(quantity - 1)}>−</button>
                     <p className={stl.card__counter__text}>{quantity}</p>
                     <button className={stl.card__counter__button} onClick={() => onChange(quantity + 1)}>+</button>
                 </div>
                 )}
-            </div>
+                    <div className={stl.card__footer}>
+                        <div className={stl.card__containerPrice}>
+                            <p className={stl.card__priceText}>Price:</p>
+                            <p className={stl.card__price}>$ {product.price}</p>
+                        </div>
+                        
+                        { showBuyButton === false &&
+                            <button className={`${stl.buttonDelete}`} onClick={onDelete}>Delete</button>
+                        }
+                    </div>
+                </div>
+            ):(
+                <>
+                    <Link className={stl.card__link} href={`/catalogy/${product.id}`}>
+                    <div className={stl.card__info}>
+                        <p className={stl.card__name}>{product.name}</p>
+                        <p className={stl.card__description}>{product.description}</p>
+                        <p className={stl.card__price}>$ {product.price}</p>
+                    </div>
+                    </Link>
+                    <div className={stl.card__buttons}>
+                    {showBuyButton !== false && 
+                        <button className={`${stl.button} ${quantity === 0 ? stl.button_full : stl.button_small}`} onClick={onAdd}>Buy</button>
+                    }
+                    {quantity > 0 && (
+                    <div className={stl.card__counter}>
+                        <button className={stl.card__counter__button} onClick={() => onChange(quantity - 1)}>−</button>
+                        <p className={stl.card__counter__text}>{quantity}</p>
+                        <button className={stl.card__counter__button} onClick={() => onChange(quantity + 1)}>+</button>
+                    </div>
+                    )}
+                    </div>
+                </>
+            ) 
+            }
+            
         </section>
     )
 }
