@@ -1,12 +1,13 @@
 "use client"
 
-import React from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
 import stl from "./hero.module.scss";
 import Image from "next/image";
 import left from "../../../public/hero/left.png";
 import right from "../../../public/hero/right.png";
 import { products } from "../../data/product";
+import { useRouter } from "next/navigation";
 
 import { Navigation, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -14,6 +15,19 @@ import 'swiper/swiper-bundle.css';
 import 'swiper/css';
 
 const Hero = () => {
+    const router = useRouter();
+    const swiperRef = useRef<any>(null); 
+
+    const handleBuyClick = () => {
+    const swiper = swiperRef.current;
+    if (swiper && typeof swiper.realIndex === "number") {
+        const product = products[swiper.realIndex];
+        if (product) {
+            router.push(`/catalogy/${product.id}`);
+            console.log(product.id);
+        }
+    }
+};
     return (
         <section className={stl.hero}>
             <Image className={stl.hero__left} src={left} alt="left" width={198} height={780} />
@@ -22,7 +36,7 @@ const Hero = () => {
                     <h1 className={stl.hero__title}>Create while playing!</h1>
                     <h2 className={stl.hero__subtitle}>Discover a world of toys that develop your child's fine motor skills and creativity.</h2>
                 </div>
-                <button className={stl.hero__button}>Buy Now</button>
+                <button className={stl.hero__button} onClick={handleBuyClick}>Buy Now</button>
             </section>
             <section className={stl.sliderHero}>
                 <Swiper
@@ -39,6 +53,7 @@ const Hero = () => {
                       768: { slidesPerView: 2 },
                       1024: { slidesPerView: 3 },
                     }}
+                    onSwiper={(swiper) => (swiperRef.current = swiper)}
                 >
                     {[...products, ...products].map((product, index) => (
                         <SwiperSlide key={`${product.id}-${index}`}>
