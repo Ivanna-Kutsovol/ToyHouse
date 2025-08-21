@@ -27,6 +27,7 @@
         justify-content: center;
         border-radius: 10px;
         background: linear-gradient(144.47deg, #fff, #d9d9d9);
+        position: relative;
     }
     &__img{
         width: 250px;
@@ -77,6 +78,27 @@
             width: 30px;
             text-align: center;
         }
+    }
+    &__priceOld{
+        font-size: 16px;
+        text-decoration: line-through;
+        color: #999;
+    }
+    &__discountBadge{
+        position: absolute;
+        z-index: 3;
+        top: 10px;
+        right: 10px;
+        background-color: rgb(236, 50, 50);
+        color: var(--white);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        font-weight: 700;
     }
 
     &--cart{

@@ -27,7 +27,6 @@ export const products = [
         "name": "Double-Sider Creative Canvas Bei Di Yuan",
         "description": "Lorem Ipsum is simply dummy text of the printing",
         "price": 29,
-        "discount": 0,
         "details": {
             "img": [
                 "/product/doubleSider.png",
@@ -50,7 +49,6 @@ export const products = [
         "name": "3D Magnet Building Blocks Construction Kit 73pcs",
         "description": "Lorem Ipsum is simply dummy text of the printing",
         "price": 64,
-        "discount": 0,
         "details": {
             "img": [
                 "/product/magnetConstruction.png",

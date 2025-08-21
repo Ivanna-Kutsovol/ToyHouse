@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react";
+import React, { useState } from "react";
 import stl from "./productCard.module.scss";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,6 +31,11 @@ const ProductCard = ({product, quantity, onAdd, onChange, onDelete, showBuyButto
         <section className={`${stl.card} ${isCart ? stl['card--cart'] : ''}`}>
             <div className={stl.card__backgraundProduct}>
                 <Image className={stl.card__img} src={product.img} alt="product" width={170} height={250} />
+                {product.discount && (
+                    <span className={stl.card__discountBadge}>
+                    -{product.discount}%
+                    </span>
+                )}
             </div>
 
             {isCart ? (
@@ -47,7 +52,14 @@ const ProductCard = ({product, quantity, onAdd, onChange, onDelete, showBuyButto
                     <div className={stl.card__footer}>
                         <div className={stl.card__containerPrice}>
                             <p className={stl.card__priceText}>Price:</p>
-                            <p className={stl.card__price}>$ {product.price}</p>
+                            {product.discount ? (
+                                <>
+                                    <p className={stl.card__priceOld}>$ {product.price}</p>
+                                    <p className={stl.card__price}>$ {(product.price * (100 - product.discount) / 100).toFixed(2)}</p>
+                                </>
+                            ) : (
+                                <p className={stl.card__price}>$ {product.price}</p>
+                            )}
                         </div>
                         
                         { showBuyButton === false &&
@@ -61,7 +73,17 @@ const ProductCard = ({product, quantity, onAdd, onChange, onDelete, showBuyButto
                     <div className={stl.card__info}>
                         <p className={stl.card__name}>{product.name}</p>
                         <p className={stl.card__description}>{product.description}</p>
-                        <p className={stl.card__price}>$ {product.price}</p>
+                        <div className={stl.card__containerPrice}>
+                            <p className={stl.card__priceText}>Price:</p>
+                            {product.discount ? (
+                                <>
+                                    <p className={stl.card__priceOld}>$ {product.price}</p>
+                                    <p className={stl.card__price}>$ {(product.price * (100 - product.discount) / 100).toFixed(2)}</p>
+                                </>
+                            ) : (
+                                <p className={stl.card__price}>$ {product.price}</p>
+                            )}
+                        </div>
                     </div>
                     </Link>
                     <div className={stl.card__buttons}>
