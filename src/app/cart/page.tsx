@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useStorage } from "@/components/utils/storage";
 
 import {useForm, SubmitHandler} from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 type IForm = {
     city: string;
@@ -29,6 +30,7 @@ const Cart = () => {
     const [alertShow, setAlertShow] = useState(false);
     const [renderAlert, setRenderAlert] = useState(false);
     const { dataState, handleChange, } = useStorage();
+    const router = useRouter();
 
     const storedData = localStorage.getItem("toyHouseData");
     const defaultFormValues = storedData ? JSON.parse(storedData).orderData : {
@@ -75,8 +77,11 @@ const Cart = () => {
         if(cartEmply){
             setAlertShow(true);
         }else{
-            console.log(data);
+            Object.keys(cart).forEach(id => removeFromCart(Number(id)));
+
             reset();
+            localStorage.removeItem("toyHouseData");
+            router.push("/checkout/success");
         }
     }
 

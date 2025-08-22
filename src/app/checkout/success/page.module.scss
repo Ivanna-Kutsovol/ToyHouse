@@ -1,0 +1,52 @@
+.success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding: 200px 0 200px 0;
+    gap: 20px;
+
+    &__icon{
+        position: relative;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        background-color: rgb(19, 193, 135);
+        border-radius: 50%;
+        &::after{
+            content: '✔';
+            color: var(--white);
+            font-size: 60px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    &__text{
+        font-size: 28px;
+        font-weight: 500;
+        color: gray;
+    }
+    &__button{
+        font-size: 20px;
+        line-height: 30px;
+        padding: 12px 32px;
+        border: 1px solid #FF268E;
+        border-radius: 18px;
+        text-align: center;
+        color: #FF268E;
+        box-sizing: border-box;
+        transition: 0.5s ease-in-out;
+        &:hover{
+            background-color: #FF268E;
+            color: #fff;
+        }
+    }
+    &__bottom{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: end;
+    }
+}
