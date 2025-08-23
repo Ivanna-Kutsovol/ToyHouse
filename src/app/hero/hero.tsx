@@ -43,22 +43,21 @@ const Hero = () => {
                     modules={[Navigation, Autoplay]}
                     autoplay={{ delay: 3000 }}
                     speed={1500}
-                    spaceBetween={50}
                     centeredSlides={true} 
                     loop={true}
                     navigation
                     className={stl.swiper}
                     breakpoints={{
-                      320: { slidesPerView: 1 },
-                      768: { slidesPerView: 2 },
-                      1024: { slidesPerView: 3 },
+                      320: { slidesPerView: 3, spaceBetween: 30 },
+                      768: { slidesPerView: 3, spaceBetween: 110 },
+                      1024: { slidesPerView: 3, spaceBetween: 50 },
                     }}
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                 >
                     {[...products, ...products].map((product, index) => (
                         <SwiperSlide key={`${product.id}-${index}`}>
                         <Link href={`/catalogy/${product.id}`}>
-                            <Image src={product.img} alt={product.name} width={130} height={195} />
+                            <Image className={stl.sliderHero__img} src={product.img} alt={product.name} width={130} height={195} />
                         </Link>
                         </SwiperSlide> 
                     ))}            

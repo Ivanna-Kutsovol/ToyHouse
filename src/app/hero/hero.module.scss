@@ -1,31 +1,64 @@
+@use "../styles/media" as *;
 .hero{
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     position: relative;
     gap: 60px;
-
+    @include tablet{
+        flex-direction: column;
+        gap: 35px;
+    }
     &__left,
     &__right{
         position: absolute;
         top: -100px;
+        @include mobile {
+            top: 0;
+        }
     }
     &__left{
         left: 0;
         margin: 0 0 0 -165px;
+        @include desktop{
+            margin: 0 0 0 -110px;
+        }
+        @include mobile{
+            margin: 0 0 0 -85px;
+        }
     }
     &__right{
         right: 0;
         margin: 0 -165px 0 0;
+        @include desktop{
+            margin: 0 -110px 0 0;
+        }
+        @include mobile{
+            margin: 0 -85px 0 0;
+        }
     }
     &__title{
         font-size: 64px;
         line-height: 78px;
         color: #FF268E;
         font-weight: bolder;
+        @include desktop{
+            font-size: 60px;
+        }
+        @include tablet{
+            text-align: center;
+            font-size: 50px;
+            line-height: 50px;
+        }
     }
     &__subtitle{
         font-weight: 400;
+        @include desktop{
+            font-size: 18px;
+        }
+        @include tablet{
+            text-align: center;
+        }
     }
     &__container{
         display: flex;
@@ -37,6 +70,10 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
+        @include tablet{
+            gap: 30px;
+            align-items: center;
+        }
     }
     &__button{
         padding: 19px 38px;
@@ -49,6 +86,10 @@
             background-color: #FF268E;
             color: var(--white);
         }
+        @include tablet{
+            font-size: 18px;
+            padding: 15px 40px;
+        }
     }
     &__drawing{
         object-fit: fill;
@@ -59,6 +100,19 @@
     position: relative;
     width: 560px;
     height: 530px;
+    align-items: center;
+    @include desktop{
+        width: 500px;
+        height: 410px;
+    }
+    @include tablet{
+        width: 700px;
+        height: 480px;
+    }
+    @include mobile{
+        width: 100%;
+        height: 290px;
+    }
 
     :global(.swiper) {
         position: relative !important;
@@ -71,6 +125,9 @@
     :global(.swiper-slide) {
         display: flex !important;
         top: 100px !important;
+        @include mobile{
+            top: 30px !important;
+        }
     }
     :global(.swiper-slide-active) {
         transform: scale(2) translateY(25%) !important;
@@ -107,5 +164,25 @@
 
     :global(.swiper-button-prev) {
         left: 80% !important;
+        @include desktop{
+            left: 75% !important;
+        }
+        @include tablet{
+            left: 80% !important;
+        }
+        @include mobile{
+            left: 70% !important;
+        }
+    }
+
+    &__img{
+        @include desktop{
+            width: 110px;
+            height: 150px;
+        }
+        @include mobile{
+            width: 65px;
+            height: 100px;
+        }
     }
 }
