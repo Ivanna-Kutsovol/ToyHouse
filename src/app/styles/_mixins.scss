@@ -1,3 +1,5 @@
+@use './media' as *;
+
 @mixin base-layout-block {
         display: flex;
         justify-content: space-between;
@@ -36,7 +38,18 @@
     justify-content: center;
     gap: 50px;
     margin: 0 0 48px 0;
-  
+    @include desktop{
+        font-size: 40px;
+        gap: 30px;
+    }
+    @include tablet{
+        font-size: 36px;
+    }
+    @include mobile{
+        font-size: 32px;
+        gap: 15px;
+    }
+
     &::before,
     &::after {
       content: '';

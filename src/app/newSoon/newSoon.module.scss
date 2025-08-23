@@ -1,5 +1,5 @@
 @use "../styles/mixins" as *;
-
+@use "../styles/media" as *;
 .title{
     @include title;
 }
@@ -31,7 +31,6 @@
         height: 100%;
         background: linear-gradient(270deg, #fff 55%, rgba(255, 255, 255, 0));
         z-index: 1;
-        // margin: 0 -165px 0 0;
       }
     }
   
@@ -58,6 +57,21 @@
         width: 200px;
         height: 250px;
         object-fit: contain;
+        @include desktop{
+            width: 170px;
+            height: 210px;
+        }
+        @include tablet{
+            width: 150px;
+            height: 190px;
+        }
+        @include mobile{
+            width: 160px;
+            height: 170px;
+            &:hover{
+                transform: scale(1);
+            }
+        }
       }
   
       &:hover {
