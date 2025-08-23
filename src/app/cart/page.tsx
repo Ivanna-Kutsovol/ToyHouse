@@ -10,18 +10,7 @@ import { useStorage } from "@/components/utils/storage";
 
 import {useForm, SubmitHandler} from "react-hook-form";
 import { useRouter } from "next/navigation";
-
-type IForm = {
-    city: string;
-    address: string;
-    name: string;
-    phone: string;
-    email: string;
-    loyaltyCard: string;
-    delivery:  "door" | "pickup";
-    comments: string;
-    agreeToTerms: boolean;
-}
+import { IForm } from "@/types/form";
 
 const Cart = () => {
     const{cart, removeFromCart, updateQuantity, totalPrice, totalDiscount, deliveryFee, finalTotal} = useCart();

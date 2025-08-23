@@ -1,22 +1,7 @@
 import React, {useState} from "react";
+import {IDataState} from "@/types/form";
 
-interface OrderData {
-  name: string;
-  phone: string;
-  email: string;
-  city: string;
-  address: string;
-  loyaltyCard: string;
-  delivery: string;
-  comments: string;
-  agreeToTerms: boolean;
-}
-
-interface DataState {
-  orderData: OrderData;
-}
-
-const data = {
+const initialData: IDataState = {
     orderData: {
         name: "",
         phone: "",
@@ -27,13 +12,13 @@ const data = {
         delivery: "door",
         comments: "",
         agreeToTerms: false
-    },
-}
+    }
+};
 
 export const useStorage = () => {
-    const [dataState, setDataState] = useState<DataState>(() => {
+    const [dataState, setDataState] = useState<IDataState>(() => {
         const result = localStorage.getItem("toyHouseData");
-        return result ? JSON.parse(result) : { orderData: {name: "", phone: "", email: "", city: "", address: "", loyaltyCard: "", delivery: "door", comments: "", agreeToTerms: false }}
+        return result ? JSON.parse(result) : initialData;
     });
 
     const handleChange = (field: string, value: string | boolean | number) => {

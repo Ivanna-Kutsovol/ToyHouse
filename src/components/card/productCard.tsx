@@ -4,18 +4,10 @@ import React, { useState } from "react";
 import stl from "./productCard.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-
-type Product = {
-    id: number,
-    name: string,
-    price: number,
-    discount?: number,
-    img: string,
-    description: string,
-}
+import { IProduct } from "@/types/product";
 
 type Props = {
-    product: Product,
+    product: IProduct,
     quantity: number,
     onAdd?: () => void,
     onChange: (qty : number) => void,
