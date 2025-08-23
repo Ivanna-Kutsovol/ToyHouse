@@ -4,7 +4,7 @@
     align-items: center;
     margin: 0 auto;
     padding: 200px 0 200px 0;
-    gap: 20px;
+    gap: 30px;
 
     &__icon{
         position: relative;
@@ -29,10 +29,11 @@
         color: gray;
     }
     &__button{
-        font-size: 20px;
+        font-size: 24px;
+        font-weight: 500;
         line-height: 30px;
         padding: 12px 32px;
-        border: 1px solid #FF268E;
+        border: 2px solid #FF268E;
         border-radius: 18px;
         text-align: center;
         color: #FF268E;
