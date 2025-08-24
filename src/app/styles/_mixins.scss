@@ -72,6 +72,9 @@
             background-color: #F4F4F4;
             color: var(--pink);
             font-size: 22px;
+            @include desktop{
+                font-size: 18px;
+            }
 
             &:hover{
                 cursor: pointer;
@@ -86,6 +89,14 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
+                @include desktop{
+                    width: 17px;
+                    height: 17px;
+                }
+                @include mobile{
+                    width: 15px;
+                    height: 15px;
+                }
             } 
     }
 }

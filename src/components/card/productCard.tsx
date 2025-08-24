@@ -42,13 +42,12 @@ const ProductCard = ({product, quantity, onAdd, onChange, onDelete, showBuyButto
                 </div>
                 )}
                     <div className={stl.card__footer}>
-                        <div className={stl.card__containerPrice}>
-                            <p className={stl.card__priceText}>Price:</p>
+                        <div>
                             {product.discount ? (
-                                <>
+                                <div className={stl.card__containerPrice}>
                                     <p className={stl.card__priceOld}>$ {product.price}</p>
                                     <p className={stl.card__price}>$ {(product.price * (100 - product.discount) / 100).toFixed(2)}</p>
-                                </>
+                                </div>
                             ) : (
                                 <p className={stl.card__price}>$ {product.price}</p>
                             )}
@@ -66,7 +65,6 @@ const ProductCard = ({product, quantity, onAdd, onChange, onDelete, showBuyButto
                         <p className={stl.card__name}>{product.name}</p>
                         <p className={stl.card__description}>{product.description}</p>
                         <div className={stl.card__containerPrice}>
-                            <p className={stl.card__priceText}>Price:</p>
                             {product.discount ? (
                                 <>
                                     <p className={stl.card__priceOld}>$ {product.price}</p>

@@ -1,4 +1,5 @@
 @use "../styles/mixins" as *;
+@use "../styles/media" as *;
 
 .title{
     @include title;
@@ -7,6 +8,12 @@
 .catalogy{
     position: relative;
     height: 656px;
+    @include desktop{
+        height: 580px;
+    }
+    @include tablet{
+        height: 100%;
+    }
 
     &__background{
         position: absolute;
@@ -14,11 +21,25 @@
         left: 0px;
         z-index: -1;
         margin: 0 0 0 -165px;
+        @include desktop{
+            bottom: -350px;
+        }
+        @include tablet{
+            bottom: 0px;
+        }
     }
 
     &__products{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        @include tablet{
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        @include mobile{
+            gap: 8px;
+        }
     }
 }
