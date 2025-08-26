@@ -1,13 +1,16 @@
 @use "../styles/mixins" as *;
+@use "../styles/media" as *;
 
 .title{
     @include title;
 }
 
 .specialConditions{
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    &__list{
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
 
     &__item{
         display: flex;
@@ -19,6 +22,17 @@
         padding: 20px 45px;
         align-items: center;
         gap: 55px;
+        @include desktop{
+            height: 120px;
+        }
+        @include tablet{
+            height: 100px;
+            padding: 30px 20px;
+        }
+        @include mobile{
+            gap: 20px;
+            height: auto;
+        }
     }
     &__star{
         background-color: var(--pink);
@@ -30,7 +44,24 @@
         line-height: 56px;
         font-weight: 600;
         flex-shrink: 0;
-        
+        @include desktop{
+            height: 80px;
+            width: 80px !important;
+            font-size: 32px;
+            line-height: 42px;
+        }
+        @include tablet{
+            height: 60px;
+            width: 60px !important;
+            font-size: 26px;
+            line-height: 32px;
+        }
+        @include mobile{
+            height: 45px;
+            width: 45px !important;
+            font-size: 18px;
+            line-height: 24px;
+    }
         display: flex;
         align-items: center;
         justify-content: center;
@@ -38,5 +69,11 @@
     &__text{
         font-size: 32px;
         font-weight: 600;
+        @include desktop{
+            font-size: 28px;
+        }
+        @include tablet{
+            font-size: 24px;
+        }
     }
 }
