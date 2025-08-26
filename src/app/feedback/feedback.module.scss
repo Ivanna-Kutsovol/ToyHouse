@@ -1,4 +1,5 @@
 @use "../styles/mixins" as *;
+@use "../styles/media" as *;
 
 .title{
     @include title;
@@ -25,12 +26,34 @@
         box-shadow: 0 2px 8px #00000015 ;
         top: 50%;
         cursor: pointer;
+        @include mobile{
+            width: 35px;
+            height: 35px;
+        }
     }
     &__next{
         right: -80px;
+        @include desktop{
+            right: 0px;
+        }
+        @include tablet{
+            right: -25px;
+        }
+        @include mobile{
+            right: -10px;
+        }
     }
     &__prev{
         left: -80px;
+        @include desktop{
+            left: 0px;
+        }
+        @include tablet{
+            left: -25px;
+        }
+        @include mobile{
+            left: -10px;
+        }
         &::before{
             transform: rotate(180deg);
         }
@@ -50,6 +73,8 @@
         bottom: -14px;
         left: 50%;
         color: black;
+        margin: 0 auto;
+        transform: translateX(-50%);
     }
     &__paginationItem{
         width: 12px;
@@ -72,6 +97,15 @@
         left: 0px;
         margin: 0 0 0 -165px;
         z-index: -10;
+        @include desktop{
+            top: -200px;
+        }
+        @include tablet{
+            top: -230px;
+        }
+        @include mobile{
+            top: -300px;
+        }
     }
     &__stars{
         display: flex;
@@ -104,6 +138,11 @@
         height: 250px ;
         scroll-snap-align: center;
         box-shadow: 0 2px 8px #00000015;
+
+        @include mobile{
+            width: 326px;
+            height: 233px;
+        }
     }
     &__profile{
         display: flex;
@@ -123,6 +162,10 @@
         font-size: 16px;
         line-height: 150%;
         color: #00000080;
+        @include mobile{
+            font-size: 15px; 
+            line-height: 24px;
+        }
     }
     .feedback__outerWrapper {
         overflow-x: auto;
@@ -132,8 +175,18 @@
         &::-webkit-scrollbar {
           display: none;
         }
-      }
-      .feedback__swiperWrapper {
+        @include desktop{
+            width: calc(67% + 100px);
+            margin: 0 auto;
+        }
+        @include tablet{
+            width: calc(85% + 30px);
+        }
+        @include mobile{
+            width: calc(100% + 25px);
+        }
+    }
+    .feedback__swiperWrapper {
         display: flex;
         gap: 30px;
         width: max-content;
@@ -144,15 +197,5 @@
         &:hover {
           animation-play-state: paused;
         }
-      }
-      
+    } 
 }
-
-// @keyframes scroll {
-//     0% {
-//       transform: translateX(0);
-//     }
-//     100% {
-//       transform: translateX(-50%);
-//     }
-//   }
