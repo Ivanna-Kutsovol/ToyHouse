@@ -28,22 +28,28 @@ const Contacts = () => {
             <div className={stl.contacts__infoTop}>
                 <address  className={stl.contacts__item}>
                     <Image className={stl.contacts__img} src={Email} alt="icon email"/>
-                    <h2 className={stl.contacts__title}>Email</h2>
-                    <a className={stl.contacts__text} href="mailto:ivannakucovol@gmail.com">ivannakucovol@gmail.com</a>
+                    <div className={stl.contacts__content}>
+                        <h2 className={stl.contacts__title}>Email</h2>
+                        <a className={stl.contacts__text} href="mailto:ivannakucovol@gmail.com">ivannakucovol@gmail.com</a>
+                    </div>
                 </address >
                 <address  className={stl.contacts__item}>
                     <Image className={stl.contacts__img} src={Phone} alt="icon phone"/>
-                    <h2 className={stl.contacts__title}>Call Us</h2>
-                    <a className={stl.contacts__text} href="tel:0800123456">0 800 123 456</a>
+                    <div className={stl.contacts__content}>
+                        <h2 className={stl.contacts__title}>Call Us</h2>
+                        <a className={stl.contacts__text} href="tel:0800123456">0 800 123 456</a>
+                    </div>
                 </address >
             </div>
             <div className={stl.contacts__infoBottom}>
                 <address  className={stl.contacts__item}>
                     <Image className={stl.contacts__img} src={Address} alt="icon address"/>
-                    <h2 className={stl.contacts__title}>Address</h2>
-                    <p className={stl.contacts__text}>Maidan Nezalezhnosti, Kyiv, Ukraine</p>
+                    <div className={stl.contacts__content}>
+                        <h2 className={stl.contacts__title}>Address</h2>
+                        <p className={stl.contacts__text}>Maidan Nezalezhnosti, Kyiv, Ukraine</p>
+                    </div>
                 </address >
-                <div className={stl.contacts__item}>
+                <div className={`${stl.contacts__item} ${stl.contacts__itemSocial}`}>
                     <h2 className={stl.contacts__title}>Follow Us</h2>
                     <div className={stl.contacts__social}>
                         <Link href="https://www.facebook.com/">
@@ -63,7 +69,7 @@ const Contacts = () => {
             </div>
                 
             </section>
-                <MyMap/>
+                <MyMap className={stl.contacts__map}/>
             </section>
             <Image className={stl.contacts__right} src={Right} alt="right" />
         </section>
