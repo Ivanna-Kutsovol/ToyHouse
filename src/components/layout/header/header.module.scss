@@ -1,4 +1,6 @@
 @use "../../../app/styles/mixins" as *;
+@use "../../../app/styles/media" as *;
+
 .main{
     position: fixed;
     width: 100%;
@@ -7,7 +9,11 @@
     z-index: 5;
     background-color: var(--white);
     gap: 350px;
-
+    @include desktop{
+        margin-left: -50px;
+        margin-right: -50px;
+        gap: 0;
+    }
     @include base-layout-block;
     .nav{
         &__link{
@@ -19,10 +25,11 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    padding: 25px 0;
+    padding: 25px;
     background-color: var(--white);
     position: fixed;
-    z-index: 2;
-    width: 90%;
+    z-index: 7;
+    width: 100%;
     top: 0;
+    right: 0;
 }

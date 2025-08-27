@@ -5,6 +5,10 @@
         justify-content: space-between;
         align-items: center;
         padding: 20px 165px;
+        z-index: 100 !important;
+        @include desktop{
+            padding: 20px 50px;
+        }
     .nav{
         display: flex;
         justify-content: space-between;
