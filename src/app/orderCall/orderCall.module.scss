@@ -1,4 +1,5 @@
 @use "../styles/mixins" as *;
+@use "../styles/media" as *;
 
 .title{
     @include title;
@@ -10,15 +11,29 @@
     &__right{
         position: absolute;
         top: 0px;
+        @include tablet{
+            width: 220px;
+            height: auto;
+            top: 50px;
+        }
+        @include mobile{
+            display: none;
+        }
     }
     &__left{
         left: 0;
         margin: 0 0 0 -165px;
         transform: rotate(180deg);
+        @include tablet{
+            margin: 0 0 0 -190px;
+        }
     }
     &__right{
         right: 0;
         margin: 0 -165px 0 0;
+        @include tablet{
+            margin: 0 -190px 0 0;
+        }
     }
 }
 
@@ -27,13 +42,21 @@
     flex-direction: column;
     gap: 40px;
     align-items: center;
+    @include tablet{
+        align-items: end;
+    }
+    @include mobile{
+        gap: 20px;
+    }
 
     &__item{
         display: flex;
         flex-direction: column;
         gap: 5px;
         position: relative;
-        
+        @include tablet{
+            width: 100%;
+        }
     }
     &__label{
         line-height: 28px;
@@ -44,9 +67,13 @@
         padding: 20px 30px;
         width: 535px;
         color: #898989;
+        box-sizing: border-box;
         &:hover,
         &:focus{
             box-shadow: inset 0 0 0 1px #000;
+        }
+        @include tablet{
+            width: 100%;
         }
     }
     &__errors{
@@ -62,5 +89,11 @@
         width: 535px;
         font-size: 24px;
         font-weight: bolder;
+        @include tablet{
+            width: 320px;
+        }
+        @include mobile{
+            width: 100%;
+        }
     }
 }
