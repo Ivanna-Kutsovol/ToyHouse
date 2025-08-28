@@ -1,17 +1,33 @@
 @use '../../styles/mixins' as *;
+@use '../../styles/media' as *;
 
 .container{
     padding: 100px 0;
+    position: relative;
 }
 .product{
     padding: 40px 0 0 0;
     display: flex;
     gap: 110px;
+    @include desktop{
+        gap: 95px;
+    }
+    @include tablet{
+        gap: 50px;
+    }
+    @include mobile{
+        flex-direction: column;
+        gap: 0;
+    }
     &__counter{   
         @include quantity;
         &__button{
             width: 40px;
             height: 40px;
+            @include tablet{
+                width: 30px;
+                height: 30px;
+            }
         }
         &__text{
             font-size: 30px;
@@ -19,18 +35,36 @@
             font-weight: bolder;
             width: 37px;
             text-align: center;
+            @include tablet{
+                font-size: 24px;
+            }
         }
     }
     &__title{
         font-size: 36px;
-        line-height: 48px;
+        line-height: normal;
         font-weight: bolder;
         color: #FF268E;
+        @include desktop{
+            font-size: 32px;
+        }
+        @include tablet{
+            font-size: 30px;
+        }
+        @include mobile{
+            padding: 40px 0 0 0;
+        }
     }
     &__price{
         font-size: 32px;
         font-weight: 800;
         line-height: 36px;
+        @include desktop{
+            font-size: 30px;
+        }
+        @include tablet{
+            font-size: 24px;
+        }
     }
     &__titlePrice{
         display: flex;
@@ -43,6 +77,13 @@
         width: 100%;
         font-size: 20px;
         padding: 8px 70px;
+        @include desktop{
+            padding: 8px 50px;
+        }
+        @include tablet{
+            padding: 8px 35px;
+            font-size: 16px;
+        }
     }
     &__buttons{
         display: flex;
@@ -51,10 +92,26 @@
     }
     &__buttonBuy{
         @include btnBuy;
+        @include mobile{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    &__fixedBtnContainer{
+        position: sticky;
+        bottom: 0;
+        background-color: var(--white);
+        padding: 10px 25px 20px;
+        width: 100%;
+        left: 0;
+        z-index: 100;
+        box-shadow: 0 0 8px #00000025;
     }
     &__buttonCart{
+        text-align: center;
         color: var(--pink);
-        font-weight: bolder;
         border: 2px solid var(--pink);
         border-radius: 8px;
     }
@@ -63,17 +120,49 @@
         flex-direction: column;
         gap: 40px;
         width: 100%;
+        @include tablet{
+            gap: 20px;
+        }
+        @include mobile{
+            margin: 40px 0 0 0;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+    &__infoContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 40px
     }
     &__imgContainer{
         width: 450px !important;
         height: 600px;
         position: relative;
         text-align: center;
+        @include desktop{
+            width: 400px !important;
+            height: 500px;
+        }
+        @include tablet{
+            width: 270px !important;
+            height: 380px;
+        }
+        @include mobile{
+            width: 100% !important;
+            height: 250px;
+        }
 
         &__mainImg{
             width: 300px;
             height: 427px;
             object-fit: contain;
+            @include desktop{
+                width: 250px;
+                height: 350px;
+            }
+            @include tablet{
+                height: 250px;
+            }
         }
         &__thumbs{
             width: 100px;
@@ -83,18 +172,39 @@
             border-radius: 8px;
             padding: 8px;
             transition: 0.2s;
-            margin: 50px 0 0 0;
+            margin: 10px 0 0 0;
             cursor: pointer;
             position: relative;
+            @include desktop{
+                width: 80px;
+                height: 80px;
+            }
+            @include tablet{
+                width: 60px;
+                height: 60px;
+            }
+            @include mobile{
+                display: none;
+            }
         }
         :global(.swiper-slide-thumb-active) img {
         border-color: var(--title) !important;
         }
         :global(.swiper-button-prev) {
             display: none;
+            @include mobile{
+                display: flex;
+                z-index: 6 !important;
+            }
+        }
+        :global(.swiper-button-prev:after){
+            @include mobile{
+                color: var(--foreground);
+                font-size: 20px;
+                font-weight: bold;
+            }
         }
         :global(.swiper-button-next) {
-            margin-top: 0 !important;
             z-index: 6 !important;
         }
         :global(.swiper-button-next:after){
@@ -107,16 +217,7 @@
     &__thumbsContainer{
         position: relative;
 
-        &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: -10px;
-        width: 110px;
-        height: 100%;
-        background: linear-gradient(-90deg, #fff 55%, rgba(255, 255, 255, 0));
-        z-index: 5;
-      }
+        @include gradient(-10px, 110px, 100%);
     }
 }
 
@@ -125,6 +226,10 @@
 }
 
 .tabs{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
     &__item{     
         display: flex;
         flex-direction: row;
@@ -132,8 +237,26 @@
         align-items: center;
         cursor: pointer;
         font-size: 20px;
-        font-weight: 700;
+        font-weight: 600;
         transition: color 0.8s ease;
+
+        -ms-overflow-style: none;  
+        scrollbar-width: none;    
+
+        &::-webkit-scrollbar {
+            display: none;           
+        }
+        @include desktop{
+            font-size: 16px;
+        }
+        @include tablet{
+            overflow-x: auto; 
+            overflow-y: hidden;
+            white-space: nowrap;
+            flex: 0 0 auto;
+            width: 340px;
+            @include gradient(-10px, 50px, 20px);
+        }
     }
     &__active{
         color: black;
@@ -147,5 +270,9 @@
         line-height: 32px;
         color: #A1A1AA;
         transition: opacity 2s ease;
+        @include desktop{
+            font-size: 14px;
+            line-height: 28px;
+        }
     }
 }

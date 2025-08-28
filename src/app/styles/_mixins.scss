@@ -128,3 +128,16 @@
         color: black;
     }
 }
+
+@mixin gradient($right, $width, $height) {
+     &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        background: linear-gradient(-90deg, #fff 55%, rgba(255, 255, 255, 0));
+        z-index: 5;
+        right: $right;
+        width: $width;
+        height: $height;
+    }
+}
