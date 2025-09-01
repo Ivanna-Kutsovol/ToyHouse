@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import stl from "./page.module.scss"
 import ProductCard from "@/components/card/productCard";
 import { useCart } from "@/context/cartContext";
@@ -18,8 +18,65 @@ const Cart = () => {
     const cartEmply = Object.values(cart).every(qty => qty === 0);
     const [alertShow, setAlertShow] = useState(false);
     const [renderAlert, setRenderAlert] = useState(false);
-    const { dataState, handleChange, } = useStorage();
+    const { dataState, handleChange } = useStorage();
     const router = useRouter();
+
+    const parentRef = useRef<HTMLFormElement>(null);
+    const productRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const parent = parentRef.current;
+        const product = productRef.current;
+
+        if(!parent || !product) return;
+
+        const handleScroll = () => {
+            const parent = parentRef.current;
+            const product = productRef.current;
+            if (!parent || !product) return;
+
+            if (window.innerWidth < 1024) {
+                product.style.position = 'static';
+                product.style.top = 'auto';
+                product.style.right = 'auto';
+                return; 
+            }
+
+            const parentRect = parent.getBoundingClientRect();
+            const productHeight = product.offsetHeight;
+            const parentHeight = parent.offsetHeight;
+            const scrollTop = window.scrollY;
+            const offsetTop = 70; 
+
+            let offsetRight = window.innerWidth >= 1440 ? 165 : 50;
+
+            if (scrollTop + offsetTop > parentRect.top + scrollTop &&
+                scrollTop + offsetTop + productHeight < parentHeight + parentRect.top + scrollTop
+            ) {
+                product.style.position = 'fixed';
+                product.style.top = `${offsetTop}px`;
+                product.style.left = 'auto';
+                product.style.right = `${window.innerWidth - parentRect.right}px`;
+            } else if (scrollTop + offsetTop + productHeight >= parentHeight + parentRect.top + scrollTop) {
+                product.style.position = 'absolute';
+                product.style.top = `${parentHeight - productHeight}px`;
+                product.style.right = '0';
+            } else {
+                product.style.position = 'static';
+                product.style.top = 'auto';
+                product.style.right = 'auto';
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleScroll);
+        handleScroll(); 
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleScroll);
+        };
+    },[])
 
     const storedData = localStorage.getItem("toyHouseData");
     const defaultFormValues = storedData ? JSON.parse(storedData).orderData : {
@@ -77,7 +134,7 @@ const Cart = () => {
     return (
         <section className={stl.cart}>
             <Link className={stl.back} href="/">Back</Link>
-            <section className={stl.cart__main}>
+            <section className={stl.cart__main} ref={parentRef}>
                 <form className={stl.cart__form} onSubmit={handleSubmit(onSubmit)}>
                     <section className={stl.cart__sectionForm}>
                         <div className={stl.cart__input}>
@@ -195,7 +252,7 @@ const Cart = () => {
                         </div>
                     </section>
                 }
-                <section className={stl.cart__products}>
+                <aside className={stl.cart__products} ref={productRef}>
                     {products.filter((product) => cart[product.id] > 0).map((product)=>(
                     <ProductCard 
                         key={product.id} 
@@ -229,7 +286,7 @@ const Cart = () => {
                             <p className={stl.cart__valueTotal}>$ {finalTotal()} </p>
                         </div>
                     </div>
-                </section>
+                </aside>
             </section>
         </section>
     )
