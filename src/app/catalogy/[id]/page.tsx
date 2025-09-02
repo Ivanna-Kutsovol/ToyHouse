@@ -15,14 +15,12 @@ import 'swiper/swiper-bundle.css';
 import 'swiper/css';
 
 type Props = {
-    params: {
-        id: string
-    }
+    params: Promise<{ id: string }>
 }
 
-const Product = ({ params, images }: { params: Promise<{ id: string }>, images: string[] }) => {
+const Product = async({ params}: Props) => {
     const { cart, addToCart, updateQuantity } = useCart();
-    const { id } = use(params);
+    const { id } = await params;
     const product = products.find((p) => p.id === Number(id));
     const [activeTab, setActiveTab] = useState("info");
     const [thumbsSwiper, setTrumbsSwiper] = useState<SwiperType | null>(null);

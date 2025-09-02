@@ -74,16 +74,16 @@ const AboutUs = () => {
             </section>
             <div className={stl.social}>
                 <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-                    <Image src={Facebook} width={32} height={32} alt="icon" />
+                    <Image src={Facebook} width={32} height={32} alt="icon" loading="lazy"/>
                 </a>
                 <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-                    <Image src={Instagram} width={32} height={32} alt="icon" />
+                    <Image src={Instagram} width={32} height={32} alt="icon" loading="lazy"/>
                 </a>
                 <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
-                    <Image src={YouTube} width={32} height={32} alt="icon" />
+                    <Image src={YouTube} width={32} height={32} alt="icon" loading="lazy"/>
                 </a>
                 <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
-                    <Image src={Twitter} width={32} height={32} alt="icon" />
+                    <Image src={Twitter} width={32} height={32} alt="icon" loading="lazy"/>
                 </a>
             </div>
         </section>

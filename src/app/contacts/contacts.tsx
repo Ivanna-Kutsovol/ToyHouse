@@ -19,7 +19,7 @@ const MyMap = dynamic(() => import("./map"), { ssr: false });
 const Contacts = () => {
     return(
         <section className={stl.contacts} id="contacts">
-            <Image className={stl.contacts__left} priority src={Left} alt="left" />
+            <Image className={stl.contacts__left} src={Left} alt="left" loading="lazy"/>
             <section className={stl.title}>
                 <h1 className={stl.title__text}>Contacts</h1>
             </section>
@@ -71,7 +71,7 @@ const Contacts = () => {
             </section>
                 <MyMap className={stl.contacts__map}/>
             </section>
-            <Image className={stl.contacts__right} src={Right} alt="right" />
+            <Image className={stl.contacts__right} src={Right} alt="right" loading="lazy"/>
         </section>
     )
 };

@@ -30,7 +30,7 @@ const Hero = () => {
 };
     return (
         <section className={stl.hero}>
-            <Image className={stl.hero__left} src={left} alt="left" width={198} height={780} />
+            <Image className={stl.hero__left} src={left} alt="left" width={198} height={780} priority/>
             <section className={stl.hero__content}>
                 <div className={stl.hero__container}>
                     <h1 className={stl.hero__title}>Create while playing!</h1>
@@ -57,7 +57,7 @@ const Hero = () => {
                     {[...products, ...products].map((product, index) => (
                         <SwiperSlide key={`${product.id}-${index}`}>
                         <Link href={`/catalogy/${product.id}`}>
-                            <Image className={stl.sliderHero__img} src={product.img} alt={product.name} width={130} height={195} />
+                            <Image className={stl.sliderHero__img} src={product.img} alt={product.name} width={130} height={195} priority/>
                         </Link>
                         </SwiperSlide> 
                     ))}            

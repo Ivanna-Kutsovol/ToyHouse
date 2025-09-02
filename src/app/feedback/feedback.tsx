@@ -69,7 +69,7 @@ const Feedback = () => {
 
     return (
         <section className={stl.feedbackWrapper} id="feedback">
-        <Image className={stl.feedback__background} src={Background} alt="background" />
+        <Image className={stl.feedback__background} src={Background} alt="background" loading="lazy"/>
         <section className={stl.feedback}>
             <section className={stl.title}>
                 <h1 className={stl.title__text}>Feedback</h1>
@@ -79,7 +79,7 @@ const Feedback = () => {
            {[...feedback, ...feedback, ...feedback].map((item, index) => (
             <div className={stl.feedback__item} key={index} >
                 <div className={stl.feedback__profile}>
-                    <Image className={stl.feedback__photo} src={item.photo} alt="photo" height={56} width={56}/>
+                    <Image className={stl.feedback__photo} src={item.photo} alt="photo" height={56} width={56} loading="lazy"/>
                     <div className={stl.feedback__info}>
                         <h3 className={stl.feedback__name}>{item.name}</h3>
                         <div className={stl.feedback__stars}>

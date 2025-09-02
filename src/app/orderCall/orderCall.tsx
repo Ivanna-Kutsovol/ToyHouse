@@ -26,7 +26,7 @@ function OrdelCall() {
 
     return (
         <section className={stl.orderCall}>
-            <Image className={stl.orderCall__left} src={Img} alt="left" />
+            <Image className={stl.orderCall__left} src={Img} alt="left" loading="lazy"/>
             <section className={stl.title}>
                 <h1 className={stl.title__text}>Order A Call</h1>
             </section>
@@ -57,7 +57,7 @@ function OrdelCall() {
                 </div>
                 <button className={stl.form__btn} type="submit">Send</button>
             </form>
-            <Image className={stl.orderCall__right} src={Img} priority alt="right" />
+            <Image className={stl.orderCall__right} src={Img} priority alt="right" loading="lazy"/>
         </section>
     );
 }
