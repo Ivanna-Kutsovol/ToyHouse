@@ -167,11 +167,22 @@
     &--cart{
         flex-direction: row;        
         gap: 16px;
-        padding: 24px 0 ;
+        padding: 0 ;
         width: 525px;
         height: 210px;
         box-shadow: none;
         cursor: default;
+
+        @include desktop{
+            width: 400px;
+            height: 180px;
+            padding: 0;
+        }
+        @include mobile{
+            width: 330px;
+            height: 145px;
+            gap: 10px;
+        }
         .card{
             &__info{
                 gap: 9px;
@@ -184,10 +195,18 @@
                 width: 180px;
                 height: 180px;
                 padding: 20px 30px;
+                @include mobile{
+                    width: 145px;
+                    height: 145px;
+                }
             }
             &__img{
                 width: 100px;
                 height: 140px;
+                @include mobile{
+                    width: 80px;
+                    height: 110px;
+                }
             }
             &__buttons{
                 display: flex;
@@ -198,6 +217,9 @@
             &__price{
                 font-size: 15px;
                 line-height: 36px;
+                @include mobile{
+                    line-height: normal;
+                }
             }
             &__footer{
                 display: flex;
@@ -213,16 +235,35 @@
                     width: 30px;
                     height: 30px;
                     font-size: 20px;
+                    @include mobile{
+                        width: 25px;
+                        height: 25px;
+                    }
                 }
                 &__text{
                     font-size: 20px;
                     font-weight: bolder;
                     width: 20px;
+                    text-align: center;
+                    @include mobile{
+                        font-size: 16px;
+                        width: 15px;
+                    }
                 }
             }
             &__name{
                 &:hover{
                     text-decoration: none;
+                }
+                @include mobile{
+                    font-size: 15px;
+                    height: fit-content;
+                }
+            }
+            &__description{
+                @include mobile{
+                    font-size: 12px;
+                    line-height: normal;
                 }
             }
         }

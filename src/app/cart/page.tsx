@@ -20,9 +20,21 @@ const Cart = () => {
     const [renderAlert, setRenderAlert] = useState(false);
     const { dataState, handleChange } = useStorage();
     const router = useRouter();
+    const [widthWindow, setWidthWindow] = useState(0);
 
     const parentRef = useRef<HTMLFormElement>(null);
     const productRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+            if (typeof window === "undefined") return;
+    
+            const handeResize = () => setWidthWindow(window.innerWidth);
+    
+            handeResize();
+            window.addEventListener("resize", handeResize);
+    
+            return () => window.removeEventListener("resize", handeResize);
+        }, [])
 
     useEffect(() => {
         const parent = parentRef.current;
@@ -46,7 +58,7 @@ const Cart = () => {
             const productHeight = product.offsetHeight;
             const parentHeight = parent.offsetHeight;
             const scrollTop = window.scrollY;
-            const offsetTop = 70; 
+            const offsetTop = 80; 
 
             let offsetRight = window.innerWidth >= 1440 ? 165 : 50;
 
@@ -133,7 +145,17 @@ const Cart = () => {
 
     return (
         <section className={stl.cart}>
-            <Link className={stl.back} href="/">Back</Link>
+            {widthWindow < 1024 ? (
+                <div className={stl.cart__backAndSummary}>
+                    <Link className={stl.back} href="/">Back</Link>
+                    <div className={stl.cart__line}>
+                        <p className={stl.cart__label}>Summary:</p> 
+                        <p className={stl.cart__value}>${totalPrice()}</p>
+                    </div>
+                </div>
+            ) :(
+                <Link className={stl.back} href="/">Back</Link>
+            )} 
             <section className={stl.cart__main} ref={parentRef}>
                 <form className={stl.cart__form} onSubmit={handleSubmit(onSubmit)}>
                     <section className={stl.cart__sectionForm}>
@@ -234,6 +256,30 @@ const Cart = () => {
                             <textarea id="comments" className={`${stl.cart__form__input} ${stl.cart__form__inputComments}` }
                             {...register("comments", {required: false, maxLength: 200})}/>
                         </div>
+                        {widthWindow < 1024 && 
+                        <div className={stl.cart__totalContainer}>
+                        <div className={stl.cart__summary}>
+                            <div className={stl.cart__line}>
+                                <p className={stl.cart__label}>Summary:</p> 
+                                <p className={stl.cart__value}>${totalPrice()}</p>
+                            </div>
+                            <div className={stl.cart__line}>
+                                <p className={stl.cart__label}>Delivery:</p> 
+                                <p className={stl.cart__value}>${deliveryFee()}</p>
+                            </div>
+                                {discount > 0 && 
+                                    <div className={stl.cart__line}> 
+                                        <p className={stl.cart__label}>Promocode: </p> 
+                                        <p className={stl.cart__value}> ${totalDiscount()}</p>
+                                    </div>
+                                }
+                        </div>
+                        <div className={stl.cart__line}>
+                            <span className={stl.cart__labelTotal}>Total:</span>
+                            <p className={stl.cart__valueTotal}>$ {finalTotal()} </p>
+                        </div>
+                    </div>
+                    }
                         <div className={stl.cart__inputCheckbox}>
                             <input type="checkbox" className={stl.cart__form__inputCheckbox} id="agreeToTerms" {...register('agreeToTerms', {required: true})}/>
                             <label className={stl.cart__form__label} htmlFor="agreeToTerms">I agree to the <span className={stl.cart__form__link}>terms of the offer </span>and the <span className={stl.cart__form__link}>loyalty policy</span></label>
@@ -264,7 +310,8 @@ const Cart = () => {
                         variant='cart'
                     />
                     ))}
-                    <div className={stl.cart__totalContainer}>
+                    {widthWindow >= 1024 && 
+                        <div className={stl.cart__totalContainer}>
                         <div className={stl.cart__summary}>
                             <div className={stl.cart__line}>
                                 <p className={stl.cart__label}>Summary:</p> 
@@ -286,6 +333,7 @@ const Cart = () => {
                             <p className={stl.cart__valueTotal}>$ {finalTotal()} </p>
                         </div>
                     </div>
+                    }
                 </aside>
             </section>
         </section>

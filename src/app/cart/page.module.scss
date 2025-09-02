@@ -9,6 +9,9 @@
         justify-content: space-between;
         gap: 60px;
         position: relative;
+        @include tablet{
+            flex-direction: column-reverse;
+        }
     }
     &__totalContainer{
         display: flex;
@@ -20,21 +23,52 @@
         flex-direction: column;
         padding: 12px 0 0 0;
         gap: 8px;
+        @include tablet{
+            align-items: end;
+        }
+        @include mobile{
+            align-items: stretch;
+        }
     }
     &__line{
         justify-content: space-between;
         display: flex;
         flex-direction: row;
+        @include tablet{
+            gap: 20vw;
+            align-items: center;
+            justify-content: end;
+        }
+        @include mobile{
+            justify-content: space-between;
+        }
     }
     &__labelTotal,
     &__valueTotal{
         font-size: 20px;
         line-height: 30px;
+        @include tablet{
+            width: 45px;
+            text-align: start;
+        }
+        @include mobile{
+            font-size: 16px;
+        }
     }
     &__label,
     &__value{
         font-size: 13px;
         line-height: 18px;
+        @include tablet{
+            width: 45px;
+            text-align: start;
+        }
+    }
+    &__value,
+    &__valueTotal{
+        @include tablet{
+            text-align: end;
+        }
     }
     &__input{
         display: flex;
@@ -76,6 +110,10 @@
 
             &:hover{
                 background-color: #ffe6f2;
+            }
+            @include mobile{
+                padding: 10px 20px;
+                font-size: 16px;
             }
         }
         &__paymentButton,
@@ -145,6 +183,17 @@
         flex-direction: row;
         gap: 10px;
         align-items: center;
+    }
+    &__products{
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+    }
+    &__backAndSummary{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center
     }
 }
 
