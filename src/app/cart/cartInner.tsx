@@ -116,11 +116,9 @@ const CartInner = () => {
       }
     }, []);
 
-    if (!isClient || !defaultFormValues) return null;
-
     const { register, handleSubmit, watch, reset, formState: { errors, isValid } } = useForm<IForm>({
         mode: "onChange",
-        defaultValues: defaultFormValues,
+        defaultValues: defaultFormValues || {},
     });
 
     useEffect(() => {
@@ -161,6 +159,8 @@ const CartInner = () => {
             router.push("/checkout/success");
         }
     }
+
+    if (!isClient) return null;
 
     return (
         <section className={stl.cart}>

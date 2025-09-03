@@ -33,7 +33,7 @@ export const Header = () => {
             {!isViewMobile && (
             <main className={stl.main}>
                 <Link className={stl.nav__linkImg} href="/">
-                    <Image className={stl.nav__img} src={Logo} alt="logo" />
+                    <Image className={stl.nav__img} src={Logo} alt="logo" priority />
                 </Link>
             <nav className={stl.nav} onClick={tooggleMenu}>
                 <ul className={stl.nav__list}>
@@ -62,16 +62,16 @@ export const Header = () => {
                 <>
                 <div className={stl.mobileHeader}>
                     <Link className={stl.nav__linkImg} href="/">
-                        <Image className={stl.nav__img} src={Logo} alt="logo" />
+                        <Image className={stl.nav__img} src={Logo} alt="logo" priority/>
                     </Link>
                     <div className={stl.burger} onClick={tooggleMenu}>
                         {!isBurgerMenu ? (
                         <button>
-                            <Image src={Open} className={stl.burgerMenu} alt="Burger Menu" width={30} height={30} />
+                            <Image src={Open} className={stl.burgerMenu} alt="Burger Menu" width={30} height={30} priority/>
                         </button>
                     ) : (
                         <button>
-                            <Image src={Close} className={stl.cross} alt="Close Menu" width={30} height={30} />
+                            <Image src={Close} className={stl.cross} alt="Close Menu" width={30} height={30} priority/>
                         </button>
                     )}
                     </div>

@@ -18,9 +18,9 @@ type Props = {
     params: Promise<{ id: string }>
 }
 
-const Product = async({ params}: Props) => {
+const Product: React.FC<Props> = ({ params }) => {
     const { cart, addToCart, updateQuantity } = useCart();
-    const { id } = await params;
+    const { id } = use(params);
     const product = products.find((p) => p.id === Number(id));
     const [activeTab, setActiveTab] = useState("info");
     const [thumbsSwiper, setTrumbsSwiper] = useState<SwiperType | null>(null);

@@ -57,7 +57,7 @@ function OrdelCall() {
                 </div>
                 <button className={stl.form__btn} type="submit">Send</button>
             </form>
-            <Image className={stl.orderCall__right} src={Img} priority alt="right" loading="lazy"/>
+            <Image className={stl.orderCall__right} src={Img} alt="right" loading="lazy"/>
         </section>
     );
 }
