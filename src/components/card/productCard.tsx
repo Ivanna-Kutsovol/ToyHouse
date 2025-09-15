@@ -88,6 +88,9 @@ const ProductCard = ({product, quantity, onAdd, onChange, onDelete, showBuyButto
                     </div>
                     )}
                     </div>
+                    <Link href={`/cart`} className={`${stl.button__addCartContainer} ${quantity > 0 ? stl.show : stl.hide}`}>
+                            <button className={`${stl.button__addCart} ${quantity > 0 ? stl.show : stl.hide}`} onClick={onAdd}>Add to cart</button>
+                    </Link>            
                 </>
             ) 
             }

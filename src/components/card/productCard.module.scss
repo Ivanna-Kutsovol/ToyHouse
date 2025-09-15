@@ -13,6 +13,7 @@
     width: 350px;
     overflow: hidden;
     cursor: pointer;
+    position: relative;
     @include desktop{
         width: 288px;
     }
@@ -274,29 +275,98 @@
     }
 }
 
-    .button{
-        height: 56px;
-        font-size: 24px;
-        @include btnBuy;
-        @include mobile{
-            font-size: 15px;
-            padding: 15px 10px;
-            height: auto;
+.button{
+    height: 56px;
+    font-size: 24px;
+    z-index: 20;
+    @include btnBuy;
+    @include mobile{
+        font-size: 15px;
+        padding: 15px 10px;
+        height: auto;
+    }
+}
+.button_full{
+    width: 21vw;
+    max-width: 100%;
+    @include tablet{
+        width: 30vw;
+    }
+    @include mobile{
+        width: 39vw;
+    }
+}
+.button_small{
+    width: 126px;
+    @include mobile{
+        width: 60px;
+    }
+}
+.button__addCartContainer{
+    width: 100%;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--pink) 0 5px 10px;
+
+    opacity: 0;
+    transform: translateY(100%);
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+
+    &.show {
+        opacity: 1;
+        transform: translateY(0); 
+        max-height: 56px;
+    }
+
+    &.hide {
+        position: absolute;
+        bottom: -40px;
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    &:hover{
+        cursor: pointer;
+        border: 1px solid var(--pink);
+        box-shadow: inset var(--pink) 0 5px 10px;
+        transition: 0.5s ease-in-out;
+        background-color: #F4F4F4;
+    }
+    @include mobile{
+        height: 40px;
+        padding: 10px 10px;
+    }
+}
+.button__addCart{
+    font-size: 24px;
+    margin: 0 auto;
+    color: var(--pink);
+    font-weight: bolder;
+    &.hide{
+        max-height: 0px;
+    }
+    @include desktop{
+        width: 268px;
+    }
+
+    @include mobile{
+        font-size: 15px;
+        @media(hover: hover){
+            background: inherit;
+            color: inherit;
+        }
+        &:active{
+            cursor: pointer;
+            border: 1px solid var(--pink);
+            box-shadow: inset var(--pink) 0 5px 10px;
+            transition: 0.5s ease-in-out;
+            background-color: #F4F4F4;
         }
     }
-    .button_full{
-        width: 21vw;
-        max-width: 100%;
-        @include tablet{
-            width: 30vw;
-        }
-        @include mobile{
-            width: 39vw;
-        }
-    }
-    .button_small{
-        width: 126px;
-        @include mobile{
-            width: 60px;
-        }
-    }
+}
