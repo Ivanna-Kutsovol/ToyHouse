@@ -9,20 +9,13 @@ import ShoppingCart from "../../../../public/shopping-cart.webp";
 import Open from "../../../../public/mobileHeader/open.webp";
 import Close from "../../../../public/mobileHeader/close.webp";
 import MobileMenu from "../mobileMenu/mobileMenu";
+import { useWindowSize } from "@/hooks";
 
 export const Header = () => {
-    const [isViewMobile, setIsViewMobile] = useState(false);
+    const { width } = useWindowSize();
+    const isViewMobile = width < 500;
+
     const [isBurgerMenu, setIsBurgerMenu] = useState(false);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsViewMobile(window.innerWidth < 500);
-        }
-        handleResize();
-
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
 
     const tooggleMenu = () => {
         setIsBurgerMenu((prev) =>!prev);

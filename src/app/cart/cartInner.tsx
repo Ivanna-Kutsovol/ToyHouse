@@ -7,6 +7,7 @@ import { products } from "@/data/product";
 import Link from "next/link";
 import { useStorage } from "@/components/utils/storage";
 import dynamic from 'next/dynamic';
+import { useWindowSize, useWindowScroll, useEventListener } from "@/hooks";
 
 import {useForm, SubmitHandler} from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -23,103 +24,38 @@ const CartInner = () => {
     const [renderAlert, setRenderAlert] = useState(false);
     const { dataState, handleChange } = useStorage();
     const router = useRouter();
-    const [widthWindow, setWidthWindow] = useState(0);
+
+    const {width} = useWindowSize();
+    const {y: scrollY} = useWindowScroll();
 
     const parentRef = useRef<HTMLFormElement>(null);
     const productRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-            if (typeof window === "undefined") return;
-    
-            const handeResize = () => setWidthWindow(window.innerWidth);
-    
-            handeResize();
-            window.addEventListener("resize", handeResize);
-    
-            return () => window.removeEventListener("resize", handeResize);
-        }, [])
-
-    useEffect(() => {
-        const parent = parentRef.current;
-        const product = productRef.current;
-
-        if(!parent || !product) return;
-
-        const handleScroll = () => {
-            const parent = parentRef.current;
-            const product = productRef.current;
-            if (!parent || !product) return;
-
-            if (window.innerWidth < 1024) {
-                product.style.position = 'static';
-                product.style.top = 'auto';
-                product.style.right = 'auto';
-                return; 
-            }
-
-            const parentRect = parent.getBoundingClientRect();
-            const productHeight = product.offsetHeight;
-            const parentHeight = parent.offsetHeight;
-            const scrollTop = window.scrollY;
-            const offsetTop = 80; 
-
-            let offsetRight = window.innerWidth >= 1440 ? 165 : 50;
-
-            if (scrollTop + offsetTop > parentRect.top + scrollTop &&
-                scrollTop + offsetTop + productHeight < parentHeight + parentRect.top + scrollTop
-            ) {
-                product.style.position = 'fixed';
-                product.style.top = `${offsetTop}px`;
-                product.style.left = 'auto';
-                product.style.right = `${window.innerWidth - parentRect.right}px`;
-            } else if (scrollTop + offsetTop + productHeight >= parentHeight + parentRect.top + scrollTop) {
-                product.style.position = 'absolute';
-                product.style.top = `${parentHeight - productHeight}px`;
-                product.style.right = '0';
-            } else {
-                product.style.position = 'static';
-                product.style.top = 'auto';
-                product.style.right = 'auto';
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', handleScroll);
-        handleScroll(); 
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('resize', handleScroll);
-        };
-    },[])
-
     const [defaultFormValues, setDefaultFormValues] = useState<IForm | null>(null);
     const [isClient, setIsClient] = useState(false);
 
-    useEffect(() => {
-      setIsClient(true);
-      const storedData = localStorage.getItem("toyHouseData");
-      if (storedData) {
-        setDefaultFormValues(JSON.parse(storedData).orderData);
-      } else {
-        setDefaultFormValues({
-          city: '',
-          address: '',
-          name: '',
-          phone: '',
-          email: '',
-          loyaltyCard: '',
-          delivery: 'door',
-          comments: '',
-          agreeToTerms: false,
-        });
-      }
-    }, []);
-
     const { register, handleSubmit, watch, reset, formState: { errors, isValid } } = useForm<IForm>({
         mode: "onChange",
-        defaultValues: defaultFormValues || {},
+        defaultValues:({
+            city: '',
+            address: '',
+            name: '',
+            phone: '',
+            email: '',
+            loyaltyCard: '',
+            delivery: 'door',
+            comments: '',
+            agreeToTerms: false,
+        }),
     });
+
+    useEffect(() => {
+        setIsClient(true);
+        const storedData = localStorage.getItem("toyHouseData");
+        if (storedData) {
+            reset(JSON.parse(storedData).orderData);
+        }
+    }, []);
 
     useEffect(() => {
         const subscription = watch((value) => {
@@ -127,15 +63,6 @@ const CartInner = () => {
         });
         return () => subscription.unsubscribe();
     }, [watch]);
-
-    useEffect(() => {
-        if (typeof window === "undefined") return;
-
-        const storedData = localStorage.getItem("toyHouseData");
-        if (storedData) {
-            setDefaultFormValues(JSON.parse(storedData).orderData);
-        }
-        }, []);
 
     useEffect(() => {
         if(alertShow){
@@ -147,6 +74,10 @@ const CartInner = () => {
         setAlertShow(false);
         setTimeout(() => setRenderAlert(false), 500);
     }
+
+    useEventListener("keydown", (e) => {
+        if (e.key === "Escape") handleClose();
+    });
 
     const onSubmit: SubmitHandler<IForm> = (data) => {
         if(cartEmply){
@@ -160,11 +91,46 @@ const CartInner = () => {
         }
     }
 
+    useEffect(() => {
+        const parent = parentRef.current;
+        const product = productRef.current;
+        if (!parent || !product) return;
+
+        const offsetTop = 80;
+        const productHeight = product.offsetHeight;
+        const parentHeight = parent.offsetHeight;
+        const parentRect = parent.getBoundingClientRect();
+
+        if (width < 1024) {
+          product.style.position = 'static';
+          product.style.top = 'auto';
+          product.style.right = 'auto';
+          return;
+        }
+
+        if (scrollY + offsetTop > parentRect.top + scrollY &&
+            scrollY + offsetTop + productHeight < parentHeight + parentRect.top + scrollY
+        ) {
+          product.style.position = 'fixed';
+          product.style.top = `${offsetTop}px`;
+          product.style.left = 'auto';
+          product.style.right = `${window.innerWidth - parentRect.right}px`;
+        } else if (scrollY + offsetTop + productHeight >= parentHeight + parentRect.top + scrollY) {
+          product.style.position = 'absolute';
+          product.style.top = `${parentHeight - productHeight}px`;
+          product.style.right = '0';
+        } else {
+          product.style.position = 'static';
+          product.style.top = 'auto';
+          product.style.right = 'auto';
+        }
+    }, [scrollY, width]);
+
     if (!isClient) return null;
 
     return (
         <section className={stl.cart}>
-            {widthWindow < 1024 ? (
+            {width < 1024 ? (
                 <div className={stl.cart__backAndSummary}>
                     <Link className={stl.back} href="/">Back</Link>
                     <div className={stl.cart__line}>
@@ -275,7 +241,7 @@ const CartInner = () => {
                             <textarea id="comments" className={`${stl.cart__form__input} ${stl.cart__form__inputComments}` }
                             {...register("comments", {required: false, maxLength: 200})}/>
                         </div>
-                        {widthWindow < 1024 && 
+                        {width < 1024 && 
                         <div className={stl.cart__totalContainer}>
                         <div className={stl.cart__summary}>
                             <div className={stl.cart__line}>
@@ -329,7 +295,7 @@ const CartInner = () => {
                         variant='cart'
                     />
                     ))}
-                    {widthWindow >= 1024 && 
+                    {width >= 1024 && 
                         <div className={stl.cart__totalContainer}>
                         <div className={stl.cart__summary}>
                             <div className={stl.cart__line}>

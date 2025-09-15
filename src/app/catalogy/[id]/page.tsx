@@ -6,6 +6,7 @@ import Image from "next/image";
 import stl from "./page.module.scss";
 import Link from "next/link";
 import { useCart } from "@/context/cartContext";
+import { useWindowSize, useWindowScroll } from "@/hooks";
 
 import { Navigation, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -24,7 +25,9 @@ const Product: React.FC<Props> = ({ params }) => {
     const product = products.find((p) => p.id === Number(id));
     const [activeTab, setActiveTab] = useState("info");
     const [thumbsSwiper, setTrumbsSwiper] = useState<SwiperType | null>(null);
-    const [widthWindow, setWidthWindow] = useState(0);
+
+    const { width } = useWindowSize();
+    const { y: scrollY } = useWindowScroll();
 
     const parentRef = useRef<HTMLDivElement | null>(null);
     const buttonRef = useRef<HTMLDivElement | null>(null);
@@ -35,35 +38,17 @@ const Product: React.FC<Props> = ({ params }) => {
 
         if(!parent || !button) return;
 
-        const handlyScroll = () => {
+        const rect = parent.getBoundingClientRect();
+        const parentBottom = rect.bottom + scrollY;
 
-            const rect = parent.getBoundingClientRect();
-
-            if(rect.bottom > window.innerHeight){
+            if(parentBottom > window.innerHeight){
                 button.style.display = "block";
                 button.style.position = "fixed";
                 button.style.bottom = "0";
             } else {
                 button.style.display = "none";
             }
-        }
-
-        window.addEventListener("scroll", handlyScroll);
-        handlyScroll();
-        return () => window.removeEventListener("scroll", handlyScroll);
-
-    },[])
-
-    useEffect(() => {
-        if (typeof window === "undefined") return;
-
-        const handeResize = () => setWidthWindow(window.innerWidth);
-
-        handeResize();
-        window.addEventListener("resize", handeResize);
-
-        return () => window.removeEventListener("resize", handeResize);
-    }, [])
+    },[scrollY])
 
     const tabsContainerRef = useRef<HTMLDivElement>(null)
 
@@ -88,7 +73,7 @@ const Product: React.FC<Props> = ({ params }) => {
     return(
         <section className={stl.container} ref={parentRef}>
             <Link className={stl.back} href="/">Back</Link>
-            {widthWindow < 425 && (
+            {width < 425 && (
                 <h1 className={stl.product__title}>{product.name}</h1>
             )}
             <section className={stl.product}>
@@ -97,11 +82,11 @@ const Product: React.FC<Props> = ({ params }) => {
                         modules={[Navigation, Autoplay, Thumbs]}
                         autoplay={{ delay: 3000 }}
                         spaceBetween={30}
-                        thumbs={{ swiper: widthWindow >= 425 ? thumbsSwiper : null }}
+                        thumbs={{ swiper: width >= 425 ? thumbsSwiper : null }}
                         centeredSlides={true}
                         loop={true}
                         className={stl.swiper}
-                        navigation={widthWindow < 425 ? true : false}
+                        navigation={width < 425 ? true : false}
                     > 
                         {product.details.img.map((img, index) => (
                             <SwiperSlide key={`main-${index}`}>
@@ -128,7 +113,7 @@ const Product: React.FC<Props> = ({ params }) => {
                         ))}
                     </Swiper>
                 </div>
-                {widthWindow <= 425 ? (
+                {width <= 425 ? (
                     <div className={stl.product__infoContainer}>
                         <div className={stl.product__info}>
                             <div className={stl.product__titlePrice}>
@@ -205,7 +190,7 @@ const Product: React.FC<Props> = ({ params }) => {
                     </div>
                 )}
             </section>
-            {widthWindow < 425 && 
+            {width < 425 && 
             <div ref={buttonRef} className={stl.product__fixedBtnContainer}>
                 <Link href="/cart" className={stl.product__fixedBtn}>
                     <button className={stl.product__buttonBuy} onClick={() => addToCart(product.id)}>
