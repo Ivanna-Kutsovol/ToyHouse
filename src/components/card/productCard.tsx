@@ -21,7 +21,7 @@ const ProductCard = ({product, quantity, onAdd, onChange, onDelete, showBuyButto
 
     return(
         <section className={`${stl.card} ${isCart ? stl['card--cart'] : ''}`}>
-            <div className={stl.card__backgraundProduct}>
+            <div className={stl.card__backgroundProduct}>
                 <Image className={stl.card__img} src={product.img} alt="product" width={170} height={250} />
                 {product.discount && (
                     <span className={stl.card__discountBadge}>
@@ -78,7 +78,7 @@ const ProductCard = ({product, quantity, onAdd, onChange, onDelete, showBuyButto
                     </Link>
                     <div className={stl.card__buttons}>
                     {showBuyButton !== false && 
-                        <button className={`${stl.button} ${quantity === 0 ? stl.button_full : stl.button_small}`} onClick={onAdd}>Buy</button>
+                        <button className={`${stl.button} ${quantity === 0 ? stl.button_full : stl.button_small}`} onClick={onAdd}>Add</button>
                     }
                     {quantity > 0 && (
                     <div className={stl.card__counter}>
@@ -89,7 +89,7 @@ const ProductCard = ({product, quantity, onAdd, onChange, onDelete, showBuyButto
                     )}
                     </div>
                     <Link href={`/cart`} className={`${stl.button__addCartContainer} ${quantity > 0 ? stl.show : stl.hide}`}>
-                            <button className={`${stl.button__addCart} ${quantity > 0 ? stl.show : stl.hide}`} onClick={onAdd}>Add to cart</button>
+                            <button className={`${stl.button__addCart} ${quantity > 0 ? stl.show : stl.hide}`} onClick={onAdd}>View cart</button>
                     </Link>            
                 </>
             ) 

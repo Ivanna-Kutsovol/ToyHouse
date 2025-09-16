@@ -17,10 +17,10 @@
 
     &__background{
         position: absolute;
-        bottom: -160px;
-        left: 0px;
         z-index: -1;
-        margin: 0 0 0 -165px;
+        margin: 0 -165px 0 -165px;
+        inset: 70px 0 -50px 0;
+        background: url("/backgroundCatalogy.svg") no-repeat center/cover;
         @include desktop{
             bottom: -350px;
         }

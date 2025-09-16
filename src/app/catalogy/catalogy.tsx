@@ -1,7 +1,6 @@
 'use client';
 import React from "react";
 import stl from "./catalogy.module.scss";
-import Background from "../../../public/backgroundCatalogy.svg";
 import Image from "next/image";
 import ProductCard from "../../components/card/productCard";
 import { products } from "../../data/product";
@@ -11,7 +10,7 @@ const Catalogy = () => {
     const { cart, addToCart, updateQuantity } = useCart();
     return (
         <section className={stl.catalogy} id="catalogy">
-            <Image className={stl.catalogy__background} src={Background} alt="background" />
+            <div className={stl.catalogy__background}/>
             <section className={stl.title}>
                 <h1 className={stl.title__text}>Catalogy</h1>
             </section>
