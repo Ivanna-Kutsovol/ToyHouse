@@ -89,4 +89,4 @@ http://localhost:3000
 
 ## Author  
 **Ivanna Kutsovol**  
-GitHub: [@Ivanna-Kutsovol]([https://github.com/Ivanna-Kutsovol)]
+GitHub: [@Ivanna-Kutsovol]([https://github.com/Ivanna-Kutsovol)
