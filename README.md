@@ -11,7 +11,11 @@ Live demo:
 
 ## Features  
 - **Product catalog**: browse the list of toys, add items to the cart, navigate to the cart  
-- **Product page**: detailed page for each product  
+![Catalog Animation](/public/readme/catalogyAnim.gif)
+
+- **Product page**: detailed page for each product 
+![Product Card Image](/public/readme/cardProduct.png) 
+
 - **Shopping cart**:  
   - add / remove items  
   - calculate total **including discounts and shipping**  
@@ -19,6 +23,8 @@ Live demo:
   - order form directly on the cart page  
   - **alert** if the user tries to submit an empty cart  
   - **separate confirmation page** after a successful order  
+![Cart Animation](/public/readme/cartAnim.gif)
+
 - **Form validation** (required fields, correct input)  
 - **Enhanced UI / UX**:  
   - animations and visual effects  
@@ -26,6 +32,8 @@ Live demo:
   - infinite slider  
   - fixed cart during scrolling (stops at the end of the block)  
   - accordion (collapsible sections)  
+![Scrolling Demo](/public/readme/scroll.gif)
+
 - **Responsive design**  
 - **Interactive map** (react-leaflet + dynamic import in Next.js)  
 - **Site pages and blocks**:  
@@ -35,7 +43,11 @@ Live demo:
   - "Contacts"  
   - individual product pages  
   - separate cart page with order form  
+- **Hero section**  
+![Hero Image](/readme/hero.png)  
 
+- **New & Soon section**  
+![New In Soon Animation](/readme/newInSoon.gif)
 ---
 
 ## Tech stack
