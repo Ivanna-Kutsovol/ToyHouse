@@ -44,10 +44,10 @@ Live demo:
   - individual product pages  
   - separate cart page with order form  
 - **Hero section**  
-![Hero Image](/readme/hero.png)  
+![Hero Image](/public/readme/hero.png)  
 
 - **New & Soon section**  
-![New In Soon Animation](/readme/newInSoon.gif)
+![New In Soon Animation](/public/readme/newInSoon.gif)
 ---
 
 ## Tech stack
