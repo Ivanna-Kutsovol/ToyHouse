@@ -48,7 +48,7 @@
         font-size: 20px;
         line-height: 30px;
         @include tablet{
-            width: 45px;
+            width: 100px;
             text-align: start;
         }
         @include mobile{
@@ -189,18 +189,31 @@
         flex-direction: column;
         gap: 36px;
         position: relative;
+        @include tablet {
+            gap: 10px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 14px;
+        }
     }
-    &__backAndSummary{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center
+    &__productList{
+        @include tablet {
+            display: flex;
+            gap: 5px;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+            max-height: 170px;
+        }
     }
 }
 
 .back{
     @include back;
     padding: 50px 0;
+    @include tablet{
+        padding: 20px 0;
+    }
 }
 
 .alert{

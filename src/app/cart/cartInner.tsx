@@ -96,33 +96,49 @@ const CartInner = () => {
         const product = productRef.current;
         if (!parent || !product) return;
 
-        const offsetTop = 80;
-        const productHeight = product.offsetHeight;
-        const parentHeight = parent.offsetHeight;
         const parentRect = parent.getBoundingClientRect();
+        const productHeight = product.offsetHeight;
 
-        if (width < 1024) {
-          product.style.position = 'static';
-          product.style.top = 'auto';
-          product.style.right = 'auto';
-          return;
-        }
+        const windowHeight = window.innerHeight;
 
-        if (scrollY + offsetTop > parentRect.top + scrollY &&
-            scrollY + offsetTop + productHeight < parentHeight + parentRect.top + scrollY
-        ) {
-          product.style.position = 'fixed';
-          product.style.top = `${offsetTop}px`;
-          product.style.left = 'auto';
-          product.style.right = `${window.innerWidth - parentRect.right}px`;
-        } else if (scrollY + offsetTop + productHeight >= parentHeight + parentRect.top + scrollY) {
-          product.style.position = 'absolute';
-          product.style.top = `${parentHeight - productHeight}px`;
-          product.style.right = '0';
+        parent.style.paddingBottom = width < 1024 ? `${productHeight}px` : '0';
+
+        if(width < 1023){
+            if (parentRect.bottom <= windowHeight) {
+                    product.style.position = 'absolute';
+                    product.style.bottom = '0';
+                    product.style.left = '0';
+                    product.style.right = '0';
+                    product.style.padding = '20px 0 0 0';
+                    product.style.boxShadow = 'none';
+                } else {
+                    product.style.position = 'fixed';
+                    product.style.bottom = '0';
+                    product.style.left = '0';
+                    product.style.right = '0';
+                    product.style.padding = '16px 20px';
+                    product.style.boxShadow = '0 -4px 10px rgba(0,0,0,0.1)';
+                }
         } else {
-          product.style.position = 'static';
-          product.style.top = 'auto';
-          product.style.right = 'auto';
+            const offsetTop = 80;
+            const parentHeight = parent.offsetHeight;
+
+            if (scrollY + offsetTop > parentRect.top + scrollY &&
+                scrollY + offsetTop + productHeight < parentHeight + parentRect.top + scrollY
+            ) {
+                product.style.position = 'fixed';
+                product.style.top = `${offsetTop}px`;
+                product.style.left = 'auto';
+                product.style.right = `${window.innerWidth - parentRect.right}px`;
+            } else if (scrollY + offsetTop + productHeight >= parentHeight + parentRect.top + scrollY) {
+                product.style.position = 'absolute';
+                product.style.top = `${parentHeight - productHeight}px`;
+                product.style.right = '0';
+            } else {
+                product.style.position = 'static';
+                product.style.top = 'auto';
+                product.style.right = 'auto';
+            }
         }
     }, [scrollY, width]);
 
@@ -130,17 +146,7 @@ const CartInner = () => {
 
     return (
         <section className={stl.cart}>
-            {width < 1024 ? (
-                <div className={stl.cart__backAndSummary}>
-                    <Link className={stl.back} href="/">Back</Link>
-                    <div className={stl.cart__line}>
-                        <p className={stl.cart__label}>Summary:</p> 
-                        <p className={stl.cart__value}>${totalPrice()}</p>
-                    </div>
-                </div>
-            ) :(
-                <Link className={stl.back} href="/">Back</Link>
-            )} 
+            <Link className={stl.back} href="/">Back</Link>
             <section className={stl.cart__main} ref={parentRef}>
                 <form className={stl.cart__form} onSubmit={handleSubmit(onSubmit)}>
                     <section className={stl.cart__sectionForm}>
@@ -241,30 +247,6 @@ const CartInner = () => {
                             <textarea id="comments" className={`${stl.cart__form__input} ${stl.cart__form__inputComments}` }
                             {...register("comments", {required: false, maxLength: 200})}/>
                         </div>
-                        {width < 1024 && 
-                        <div className={stl.cart__totalContainer}>
-                        <div className={stl.cart__summary}>
-                            <div className={stl.cart__line}>
-                                <p className={stl.cart__label}>Summary:</p> 
-                                <p className={stl.cart__value}>${totalPrice()}</p>
-                            </div>
-                            <div className={stl.cart__line}>
-                                <p className={stl.cart__label}>Delivery:</p> 
-                                <p className={stl.cart__value}>${deliveryFee()}</p>
-                            </div>
-                                {discount > 0 && 
-                                    <div className={stl.cart__line}> 
-                                        <p className={stl.cart__label}>Promocode: </p> 
-                                        <p className={stl.cart__value}> ${totalDiscount()}</p>
-                                    </div>
-                                }
-                        </div>
-                        <div className={stl.cart__line}>
-                            <span className={stl.cart__labelTotal}>Total:</span>
-                            <p className={stl.cart__valueTotal}>$ {finalTotal()} </p>
-                        </div>
-                    </div>
-                    }
                         <div className={stl.cart__inputCheckbox}>
                             <input type="checkbox" className={stl.cart__form__inputCheckbox} id="agreeToTerms" {...register('agreeToTerms', {required: true})}/>
                             <label className={stl.cart__form__label} htmlFor="agreeToTerms">I agree to the <span className={stl.cart__form__link}>terms of the offer </span>and the <span className={stl.cart__form__link}>loyalty policy</span></label>
@@ -284,41 +266,41 @@ const CartInner = () => {
                     </section>
                 }
                 <aside className={stl.cart__products} ref={productRef}>
-                    {products.filter((product) => cart[product.id] > 0).map((product)=>(
-                    <ProductCard 
-                        key={product.id} 
-                        product={product} 
-                        quantity={cart[product.id] || 0}
-                        onDelete={() => removeFromCart(product.id)}
-                        onChange={(quantity) => updateQuantity(product.id, quantity)}
-                        showBuyButton={false}
-                        variant='cart'
-                    />
-                    ))}
-                    {width >= 1024 && 
+                    <div className={stl.cart__productList}>
+                        {products.filter((product) => cart[product.id] > 0).map((product)=>(
+                            <ProductCard 
+                                key={product.id} 
+                                product={product} 
+                                quantity={cart[product.id] || 0}
+                                onDelete={() => removeFromCart(product.id)}
+                                onChange={(quantity) => updateQuantity(product.id, quantity)}
+                                showBuyButton={false}
+                                variant='cart'
+                            />
+                        ))}
+                    </div>
                         <div className={stl.cart__totalContainer}>
-                        <div className={stl.cart__summary}>
-                            <div className={stl.cart__line}>
-                                <p className={stl.cart__label}>Summary:</p> 
-                                <p className={stl.cart__value}>${totalPrice()}</p>
+                            <div className={stl.cart__summary}>
+                                <div className={stl.cart__line}>
+                                    <p className={stl.cart__label}>Summary:</p> 
+                                    <p className={stl.cart__value}>${totalPrice()}</p>
+                                </div>
+                                <div className={stl.cart__line}>
+                                    <p className={stl.cart__label}>Delivery:</p> 
+                                    <p className={stl.cart__value}>${deliveryFee()}</p>
+                                </div>
+                                    {discount > 0 && 
+                                        <div className={stl.cart__line}> 
+                                            <p className={stl.cart__label}>Promocode: </p> 
+                                            <p className={stl.cart__value}> ${totalDiscount()}</p>
+                                        </div>
+                                    }
                             </div>
-                            <div className={stl.cart__line}>
-                                <p className={stl.cart__label}>Delivery:</p> 
-                                <p className={stl.cart__value}>${deliveryFee()}</p>
-                            </div>
-                                {discount > 0 && 
-                                    <div className={stl.cart__line}> 
-                                        <p className={stl.cart__label}>Promocode: </p> 
-                                        <p className={stl.cart__value}> ${totalDiscount()}</p>
-                                    </div>
-                                }
-                        </div>
                         <div className={stl.cart__line}>
                             <span className={stl.cart__labelTotal}>Total:</span>
                             <p className={stl.cart__valueTotal}>$ {finalTotal()} </p>
                         </div>
                     </div>
-                    }
                 </aside>
             </section>
         </section>

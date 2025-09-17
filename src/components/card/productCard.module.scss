@@ -17,6 +17,9 @@
     @include desktop{
         width: 288px;
     }
+    @include tablet{
+        overflow: visible;
+    }
     @include mobile{
         width: 160px;
         padding: 8px;
