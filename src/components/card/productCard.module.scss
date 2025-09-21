@@ -315,22 +315,8 @@
     border-radius: 8px;
     box-shadow: var(--pink) 0 5px 10px;
 
-    opacity: 0;
-    transform: translateY(100%);
-    overflow: hidden;
-    transition: all 0.4s ease-in-out;
-
-    &.show {
-        opacity: 1;
-        transform: translateY(0); 
-        max-height: 56px;
-    }
-
     &.hide {
-        position: absolute;
-        bottom: -100px;
-        opacity: 0;
-        transform: translateY(-100%);
+        display: none;
     }
 
     &:hover{
@@ -350,9 +336,6 @@
     margin: 0 auto;
     color: var(--pink);
     font-weight: bolder;
-    &.hide{
-        max-height: 0px;
-    }
     @include desktop{
         width: 268px;
     }
