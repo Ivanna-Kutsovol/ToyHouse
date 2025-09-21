@@ -221,6 +221,16 @@
     }
 }
 
+// @media(min-width: 421px){
+//     .product{
+//         &__info{
+//             margin: 40px 0 0 0;
+//             flex-direction: column;
+//             justify-content: space-between;
+//         }
+//     }
+// }
+
 .back{
     @include back;
 }

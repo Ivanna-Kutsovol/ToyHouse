@@ -73,7 +73,7 @@ const Product: React.FC<Props> = ({ params }) => {
     return(
         <section className={stl.container} ref={parentRef}>
             <Link className={stl.back} href="/">Back</Link>
-            {width < 425 && (
+            {width < 700 && (
                 <h1 className={stl.product__title}>{product.name}</h1>
             )}
             <section className={stl.product}>
@@ -82,11 +82,11 @@ const Product: React.FC<Props> = ({ params }) => {
                         modules={[Navigation, Autoplay, Thumbs]}
                         autoplay={{ delay: 3000 }}
                         spaceBetween={30}
-                        thumbs={{ swiper: width >= 425 ? thumbsSwiper : null }}
+                        thumbs={{ swiper: width >= 700 ? thumbsSwiper : null }}
                         centeredSlides={true}
                         loop={true}
                         className={stl.swiper}
-                        navigation={width < 425 ? true : false}
+                        navigation={width < 700 ? true : false}
                     > 
                         {product.details.img.map((img, index) => (
                             <SwiperSlide key={`main-${index}`}>
@@ -113,7 +113,7 @@ const Product: React.FC<Props> = ({ params }) => {
                         ))}
                     </Swiper>
                 </div>
-                {width <= 425 ? (
+                {width <= 700 ? (
                     <div className={stl.product__infoContainer}>
                         <div className={stl.product__info}>
                             <div className={stl.product__titlePrice}>
@@ -190,7 +190,7 @@ const Product: React.FC<Props> = ({ params }) => {
                     </div>
                 )}
             </section>
-            {width < 425 && 
+            {width < 700 && 
             <div ref={buttonRef} className={stl.product__fixedBtnContainer}>
                 <Link href="/cart" className={stl.product__fixedBtn}>
                     <button className={stl.product__buttonBuy} onClick={() => addToCart(product.id)}>
