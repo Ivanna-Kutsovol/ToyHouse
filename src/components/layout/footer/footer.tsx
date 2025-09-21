@@ -14,16 +14,16 @@ export const Footer = () => {
                 <nav className={stl.nav}>
                     <ul className={stl.nav__list}>
                         <li className={stl.nav__item}>
-                            <Link className={stl.nav__link} href="/about">About us</Link>
+                            <Link className={stl.nav__link} href="/#about">About us</Link>
                         </li>
                         <li className={stl.nav__item}>
-                            <Link className={stl.nav__link} href="/catalogy">Catalogy</Link>
+                            <Link className={stl.nav__link} href="/#catalogy">Catalogy</Link>
                         </li>
                         <li className={stl.nav__item}>
-                            <Link className={stl.nav__link} href="/feedback">Feedback</Link>
+                            <Link className={stl.nav__link} href="/#feedback">Feedback</Link>
                         </li>
                         <li className={stl.nav__item}>
-                            <Link className={stl.nav__link} href="/contacts">Contacts</Link>
+                            <Link className={stl.nav__link} href="/#contacts">Contacts</Link>
                         </li>
                     </ul>
                 </nav>
