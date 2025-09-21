@@ -32,40 +32,41 @@ const feedback = [
     },
 ]
 
-const CARD_WIDTH = 340;
 const GAP = 30;
-const STEP = CARD_WIDTH + GAP;
 
 const Feedback = () => {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [CARD_WIDTH, setCardWidth] = useState(326);
 
     useEffect(() => {
         const wrapper = wrapperRef.current;
         if (!wrapper) return;
 
-        const totalWidth = feedback.length * STEP;
-        wrapper.scrollLeft = totalWidth;
+        const firstCard = wrapper.querySelector<HTMLDivElement>('.feedback__item');
+        if (firstCard) {
+            setCardWidth(firstCard.offsetWidth);
+        }
+    }, []);
+
+    const STEP = CARD_WIDTH + GAP;
+
+    const scrollRight = () => wrapperRef.current?.scrollBy({ left: STEP, behavior: 'smooth' });
+    const scrollLeft = () => wrapperRef.current?.scrollBy({ left: -STEP, behavior: 'smooth' });
+
+    useEffect(() => {
+        const wrapper = wrapperRef.current;
+        if (!wrapper) return;
 
         const handleScroll = () => {
-            if (wrapper.scrollLeft <= STEP) {
-                wrapper.scrollLeft += totalWidth;
-            } else if (wrapper.scrollLeft >= totalWidth * 2 - STEP) {
-                wrapper.scrollLeft -= totalWidth;
-            }
-
-            const centerOffset = wrapper.scrollLeft % totalWidth;
-            const index = Math.floor(centerOffset / STEP);
-            setCurrentIndex(index);
+            const scrollLeft = wrapper.scrollLeft;
+            const index = Math.round(scrollLeft / STEP);
+            setCurrentIndex(index % feedback.length);
         };
 
         wrapper.addEventListener("scroll", handleScroll);
-
         return () => wrapper.removeEventListener("scroll", handleScroll);
     }, [STEP]);
-    
-      const scrollRight = () => wrapperRef.current?.scrollBy({ left: STEP, behavior: 'smooth' });
-      const scrollLeft = () => wrapperRef.current?.scrollBy({ left: -STEP, behavior: 'smooth' });
 
     return (
         <section className={stl.feedbackWrapper} id="feedback">

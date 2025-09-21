@@ -171,6 +171,7 @@
         overflow-x: auto;
         width: 100%;
         box-sizing: border-box;
+        padding: 0 15px;
       
         &::-webkit-scrollbar {
           display: none;
@@ -183,7 +184,8 @@
             width: calc(85% + 30px);
         }
         @include mobile{
-            width: calc(100% + 25px);
+            width: 100%;
+            margin: 0 auto;
         }
     }
     .feedback__swiperWrapper {
